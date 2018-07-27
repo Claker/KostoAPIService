@@ -1,0 +1,11 @@
+{
+  "name": "KostoAPIService",
+  "version": "1.0.0",
+  "description": "KostoAPIService",
+  "main": "KostoAPIService.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ClaudiuSocaci",
+  "license": "ISC"
+}
