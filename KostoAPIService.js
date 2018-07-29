@@ -1,23 +1,34 @@
 const express = require('express')();
-const xray = require('x-ray')();
+const parser = require('./parser');
 
-const intAndFloatsRegex = /[+-]?\d+(\.\d+)?/g;
+const spaceRegex = / /g;
 const port = process.env.PORT || 3000;
+const numbeoCityLink = 'https://www.numbeo.com/cost-of-living/in/';
+const expatistanCityLink = 'https://www.expatistan.com/cost-of-living/';
 
-express.get('/getAverageCostOfMilk/:city',(req,res)=>{
-    
-    var city = req.params.city;
-    
-    xray(`https://www.expatistan.com/cost-of-living/${city}`,
-    '.single-city tbody tr:nth-child(5) td.price').then( function(res1){
-            
-        xray(`https://www.numbeo.com/cost-of-living/in/${city}`,
-        '.data_wide_table tr:nth-child(11) td:nth-child(2)').then(function(res2){
+express.get('/getAverageCostOfMilk/:city',(req,res)=>
+{
+    let city = req.params.city;
+    city = city.replace(spaceRegex,'');
 
-            res1 = parseFloat(res1.match(intAndFloatsRegex));
-            res2 = parseFloat(res2.match(intAndFloatsRegex));
-
-            res.send((res1+res2)/2.0+'');
+    parser.getExpatistanMilkPrice(expatistanCityLink+city)
+    .then( function(milkPriceExpatistan)
+    {
+        parser.getNumbeoMilkPrice(numbeoCityLink+city)
+        .then(function(milkPriceNumbeo)
+        {
+            if(milkPriceNumbeo==='')
+            {
+                parser.retryGetNumbeoMilkPrice(city)
+                .then(function(milkPriceNumbeo2)
+                {
+                    parser.sendPriceResponse(milkPriceExpatistan, milkPriceNumbeo2, res);
+                });
+            }
+            else
+            {
+                parser.sendPriceResponse(milkPriceExpatistan, milkPriceNumbeo, res);
+            }
         });
     });
 });
