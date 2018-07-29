@@ -11,26 +11,26 @@ express.get('/getAverageCostOfMilk/:city',(req,res)=>
     let city = req.params.city;
     city = city.replace(spaceRegex,'');
 
-    parser.getExpatistanMilkPrice(expatistanCityLink+city)
-    .then( function(milkPriceExpatistan)
-    {
-        parser.getNumbeoMilkPrice(numbeoCityLink+city)
-        .then(function(milkPriceNumbeo)
-        {
-            if(milkPriceNumbeo==='')
-            {
-                parser.retryGetNumbeoMilkPrice(city)
-                .then(function(milkPriceNumbeo2)
-                {
-                    parser.sendPriceResponse(milkPriceExpatistan, milkPriceNumbeo2, res);
-                });
-            }
-            else
-            {
-                parser.sendPriceResponse(milkPriceExpatistan, milkPriceNumbeo, res);
-            }
-        });
+    Promise.all(
+        [parser.getExpatistanMilkPrice(expatistanCityLink+city)
+        ,parser.getNumbeoMilkPrice(numbeoCityLink+city, city)])
+    .then(([milkPriceExpatistan,milkPriceNumbeo]) =>  
+    { 
+        parser.sendPriceResponse(milkPriceExpatistan, milkPriceNumbeo, res);
     });
 });
 
 express.listen(port, ()=>{console.log(`Server is up on port ${port};`);});
+
+
+/// use of Promise.all
+    // parser.getExpatistanMilkPrice(expatistanCityLink+city)
+    // .then( milkPriceExpatistan => Promise.all([milkPriceExpatistan, parser.getNumbeoMilkPrice(numbeoCityLink+city)]))
+    // .then(([milkPriceExpatistan, milkPriceNumbeo])=> Promise.all([
+    //     milkPriceExpatistan,
+    //     milkPriceNumbeo===''? parser.retryGetNumbeoMilkPrice(city) : milkPriceNumbeo]
+    //   ))
+    // .then(([milkPriceExpatistan, milkPriceNumbeo]) =>
+    // {
+    //     parser.sendPriceResponse(milkPriceExpatistan, milkPriceNumbeo, res);
+    // });

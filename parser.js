@@ -2,22 +2,10 @@ const xray = require('x-ray')();
 
 const intAndFloatsRegex = /[+-]?\d+(\.\d+)?/g;
 
-let getNumbeoMilkPrice = (link) =>
+let getNumbeoMilkPrice = (link,city) =>
 {
-    return xray(link,'.data_wide_table tr:nth-child(11) td:nth-child(2)');    
-}
-
-let retryGetNumbeoMilkPrice = (city) =>
-{
-    return getCorrectCityLinkForNumbeo(city)
-            .then(function(correctLink)
-            {
-                return getNumbeoMilkPrice(correctLink);
-            })
-            .catch(function(err)
-            {
-                return '';
-            });
+    return xray(link,'.data_wide_table tr:nth-child(11) td:nth-child(2)')
+    .then(res => res ? res : retryGetNumbeoMilkPrice(city));    
 }
 
 let getExpatistanMilkPrice = (link) =>
@@ -59,7 +47,19 @@ function extractPrices(price1String,price2String)
             ,price2 : parseFloat(price2String.match(intAndFloatsRegex)) }
 }
 
+function retryGetNumbeoMilkPrice(city) 
+{
+    return getCorrectCityLinkForNumbeo(city)
+            .then(function(correctLink)
+            {
+                return getNumbeoMilkPrice(correctLink);
+            })
+            .catch(function(err)
+            {
+                return '';
+            });
+}
+
 module.exports = {getNumbeoMilkPrice,
                     sendPriceResponse,
-                    retryGetNumbeoMilkPrice,
                     getExpatistanMilkPrice,}
