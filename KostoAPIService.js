@@ -10,7 +10,7 @@ express.get('/getAverageCostOfMilk/:city',(req,res)=>
 {
     let city = req.params.city;
     city = city.replace(spaceRegex,'');
-
+ 
     Promise.all(
         [parser.getExpatistanMilkPrice(expatistanCityLink+city)
         ,parser.getNumbeoMilkPrice(numbeoCityLink+city, city)])
