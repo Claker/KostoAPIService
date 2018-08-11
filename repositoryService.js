@@ -6,58 +6,53 @@ const {ItemType} = require('./models/itemType');
 const ItemModel = require('./repository/item.repo');
 const ItemTypeModel = require('./repository/itemType.repo');
 
+ItemModel.deleteFirstItem({name:'Pilk'}).then((doc)=>{
+    console.log('a mers');
+    mongoose.connection.close();
+},(err)=>{console.log('N-a mers');});
 
-ItemTypeModel.insertItemType(new ItemType({name:'Dairy'})).then((doc)=>
-{
-    console.log('Successfully saved itemType');
+// ItemTypeModel.insertItemType(new ItemType({name:'Dairy'})).then((doc)=>
+// {
+//     console.log('Successfully saved itemType');
 
-    ItemTypeModel.getItemType({name:'Dairy'}).then((doc)=>
-    {
-        console.log('Result getting itemType:', JSON.stringify(doc,undefined,2));
+//     ItemTypeModel.getFirstItemType({name:'Dairy'}).then((doc)=>
+//     {
+//         console.log('Result getting itemType:', JSON.stringify(doc,undefined,2));
 
-        let y = ItemModel.insertItem(new Item({name:'Milk', itemType:doc._id, isDefaultItem: true}));
+//         let y = ItemModel.insertItem(new Item({name:'Milk', itemType:doc._id, isDefaultItem: true}));
 
-        y.then((doc)=>{
+//         y.then((doc)=>{
 
-            if(!doc)
-                return console.log('Not able to save item');
-            console.log('Item saved succesfully');
+//             if(!doc)
+//                 return console.log('Not able to save item');
+//             console.log('Item saved succesfully');
 
-            ItemModel.getItem({name:'Milk'}).then((doc)=>{
+//             ItemModel.getFirstItem({name:'Milk'}).then((doc)=>{
             
-            if(!doc)
-                return console.log('Not able to get item');
+//             if(!doc)
+//                 return console.log('Not able to get item');
 
-            console.log('Item gotten succesfully',JSON.stringify(doc,undefined,2));
+//             console.log('Item gotten succesfully',JSON.stringify(doc,undefined,2));
 
 
                 
-            ItemModel.getItem({name:'Milk'}).populate('itemType').exec((err,doc)=>{
-                if(!err)
-                    console.log('Got item with itemType',JSON.stringify(doc,undefined,2));
-                else
-                    console.log('Fail to retrieve item and populate itemType');
+//             ItemModel.getFirstItem({name:'Milk'}).populate('itemType').exec((err,doc)=>{
+//                 if(!err)
+//                     console.log('Got item with itemType',JSON.stringify(doc,undefined,2));
+//                 else
+//                     console.log('Fail to retrieve item and populate itemType');
 
-                mongoose.connection.close();
+//                 mongoose.connection.close();
 
-            });
+//             });
 
-            });
+//             });
 
-        });
+//         });
 
-    },(e)=>{});
+//     },(e)=>{});
 
-},(e)=>
-{
-    console.log('Unable to save data');
-});
-
-
-
-    // Item.findOne({name:'Milk'})
-    //     .populate('itemType')
-    //     .exec(function(err, post) {
-    //     console.log(post);
-    // });
-    // mongoose.connection.close();
+// },(e)=>
+// {
+//     console.log('Unable to save data');
+// });
