@@ -1,18 +1,18 @@
-const {mongoose} = require('./mongoose');
-const {Item} = require('../models/item');
+// const {mongoose} = require('./mongoose');
+const {Item} = require('../db.models/item');
 
-// Insert
+// Create
 let insertItem = (item) => {
     return item.save();
 };
 
-// Get
-let getFirstItem = (item) => {
-    return Item.findOne(item);
+// Read
+let getFirstItem = (query) => {
+    return Item.findOne(query);
 };
 
-let getItems = (item) => {
-    return Item.find(item);
+let getItems = (query) => {
+    return Item.find(query);
 };
 
 // Update
@@ -25,12 +25,12 @@ let updateAllItems = (query,updateValues) => {
 };
 
 // Delete
-let deleteAllItems = (query) => {
-    return Item.deleteMany(query);
-};
-
 let deleteFirstItem = (query) => {
     return Item.delete(query);
+};
+
+let deleteAllItems = (query) => {
+    return Item.deleteMany(query);
 };
 
 module.exports = {insertItem, 

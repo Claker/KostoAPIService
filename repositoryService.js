@@ -1,7 +1,7 @@
 const {mongoose} = require('./repository/mongoose');
 
-const {Item} = require('./models/item');
-const {ItemType} = require('./models/itemType');
+const {Item} = require('./db.models/item');
+const {ItemType} = require('./db.models/itemType');
 
 const ItemModel = require('./repository/item.repo');
 const ItemTypeModel = require('./repository/itemType.repo');

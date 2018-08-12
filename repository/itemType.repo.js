@@ -1,5 +1,5 @@
-const {ItemType} = require('../models/itemType');
-const {mongoose} = require('./mongoose');
+const {ItemType} = require('../db.models/itemType');
+// const {mongoose} = require('./mongoose');
 
 // Insert
 let insertItemType = (itemType) => 
