@@ -26,7 +26,7 @@ let updateAllCountries = (query,updateValues) => {
 
 // Delete
 let deleteFirstCountry = (query) => {
-    return Country.delete(query);
+    return Country.findOneAndDelete(query);
 };
 
 let deleteAllCountries = (query) => {

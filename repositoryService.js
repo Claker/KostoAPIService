@@ -6,10 +6,10 @@ const {ItemType} = require('./db.models/itemType');
 const ItemModel = require('./repository/item.repo');
 const ItemTypeModel = require('./repository/itemType.repo');
 
-ItemModel.deleteFirstItem({name:'Pilk'}).then((doc)=>{
-    console.log('a mers');
-    mongoose.connection.close();
-},(err)=>{console.log('N-a mers');});
+// ItemModel.deleteFirstItem({name:'Pilk'}).then((doc)=>{
+//     console.log('a mers');
+//     mongoose.connection.close();
+// },(err)=>{console.log('N-a mers');});
 
 // ItemTypeModel.insertItemType(new ItemType({name:'Dairy'})).then((doc)=>
 // {

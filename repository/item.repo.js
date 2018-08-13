@@ -26,7 +26,7 @@ let updateAllItems = (query,updateValues) => {
 
 // Delete
 let deleteFirstItem = (query) => {
-    return Item.delete(query);
+    return Item.findOneAndDelete(query);
 };
 
 let deleteAllItems = (query) => {

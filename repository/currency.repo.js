@@ -26,7 +26,7 @@ let updateAllCurrencies = (query,updateValues) => {
 
 // Delete
 let deleteFirstCurrency = (query) => {
-    return Currency.delete(query);
+    return Currency.findOneAndDelete(query);
 };
 
 let deleteAllCurrencies = (query) => {

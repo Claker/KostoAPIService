@@ -1,4 +1,3 @@
-// const {mongoose} = require('./mongoose');
 const {City} = require('../db.models/city');
 
 // Create
@@ -26,7 +25,7 @@ let updateAllCities = (query,updateValues) => {
 
 // Delete
 let deleteFirstCity = (query) => {
-    return City.delete(query);
+    return City.findOneAndDelete(query);
 };
 
 let deleteAllCities = (query) => {

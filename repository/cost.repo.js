@@ -1,4 +1,3 @@
-// const {mongoose} = require('./mongoose');
 const {Cost} = require('../db.models/cost');
 
 // Create
@@ -26,7 +25,7 @@ let updateAllCosts = (query,updateValues) => {
 
 // Delete
 let deleteFirstCost = (query) => {
-    return Cost.delete(query);
+    return Cost.findOneAndDelete(query);
 };
 
 let deleteAllCosts = (query) => {

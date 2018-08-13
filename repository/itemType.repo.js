@@ -13,7 +13,7 @@ let getFirstItemType = (itemType) =>
     return ItemType.findOne(itemType);
 };
 
-let getItemTypes = (itemType) => 
+let getAllItemTypes = (itemType) => 
 {
     return ItemType.find(itemType);
 };
@@ -33,12 +33,12 @@ let deleteAllItemTypes = (query) => {
 };
 
 let deleteFirstItemType = (query) => {
-    return ItemType.delete(query);
+    return ItemType.findOneAndDelete(query);
 };
 
 module.exports = {insertItemType, 
                 getFirstItemType, 
-                getItemTypes, 
+                getAllItemTypes, 
                 updateFirstItemType, 
                 updateAllItemTypes,
                 deleteFirstItemType,
