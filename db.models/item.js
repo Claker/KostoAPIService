@@ -9,7 +9,8 @@ const ItemSchema = new Schema({
     itemType: { type : mongoose.Schema.Types.ObjectId, ref: ItemType.modelName , 
                 required : [ true, 'Item Type is required.'] },
     isDefaultItem: { type: Boolean, 
-                     required : [true, 'Is Default Item is required.'] },
+                     required : [true, 'Is Default Item is required.'],
+                        default: false },
 });
 
 // create model
