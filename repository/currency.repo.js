@@ -1,4 +1,3 @@
-// const {mongoose} = require('./mongoose');
 const {Currency} = require('../db.models/currency');
 
 // Create

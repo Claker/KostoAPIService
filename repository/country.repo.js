@@ -1,4 +1,3 @@
-// const {mongoose} = require('./mongoose');
 const {Country} = require('../db.models/city');
 
 // Create

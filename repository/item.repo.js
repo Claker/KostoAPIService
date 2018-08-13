@@ -1,4 +1,3 @@
-// const {mongoose} = require('./mongoose');
 const {Item} = require('../db.models/item');
 
 // Create
