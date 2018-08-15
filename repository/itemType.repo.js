@@ -1,20 +1,20 @@
 const {ItemType} = require('../db.models/itemType');
 
-// Insert
+// Create
 let insertItemType = (itemType) => 
 {
     return itemType.save();
 };
 
-// Get
-let getFirstItemType = (itemType) => 
+// Read
+let getFirstItemType = (query) => 
 {
-    return ItemType.findOne(itemType);
+    return ItemType.findOne(query);
 };
 
-let getAllItemTypes = (itemType) => 
+let getAllItemTypes = (query) => 
 {
-    return ItemType.find(itemType);
+    return ItemType.find(query);
 };
 
 // Update
@@ -27,12 +27,12 @@ let updateAllItemTypes = (query,updateValues) => {
 };
 
 // Delete
-let deleteAllItemTypes = (query) => {
-    return ItemType.deleteMany(query);
-};
-
 let deleteFirstItemType = (query) => {
     return ItemType.findOneAndDelete(query);
+};
+
+let deleteAllItemTypes = (query) => {
+    return ItemType.deleteMany(query);
 };
 
 module.exports = {insertItemType, 

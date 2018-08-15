@@ -4,7 +4,7 @@
   "description": "KostoAPIService",
   "main": "KostoAPIService.js",
   "scripts": {
-    "test": "mocha tests/**/*.tests.js"
+    "test": "mocha tests/**/item.tests.js"
   },
   "author": "ClaudiuSocaci",
   "license": "ISC",

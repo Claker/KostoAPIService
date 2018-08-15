@@ -9,10 +9,12 @@ describe('Test ItemType CRUD', () => {
     let idToTest1 = '53cb6b9b4f4ddef1ad47f949';
     let idToTest2 = '53cb6b9b4f4ddef1ad47f950';
     let idToTest3 = '53cb6b9b4f4ddef1ad47f951';
+    let idToTest4 = '53cb6b9b4f4ddef1ad47f952';
 
-    let itemType1 = new ItemType({_id:idToTest1, name:'ItemTypeTest'});
-    let itemType2 = new ItemType({_id:idToTest2, name:'ItemTypeTest'});
-    let itemType3 = new ItemType({_id:idToTest3, name:'ItemTypeTest'});
+    let itemType1 = new ItemType({_id:idToTest1, name:'ItemTypeTest1'});
+    let itemType2 = new ItemType({_id:idToTest2, name:'ItemTypeTest1'});
+    let itemType3 = new ItemType({_id:idToTest3, name:'ItemTypeTest1'});
+    let itemType4 = new ItemType({_id:idToTest4, name:'ItemTypeTest2'});
 
     it('should insert item types',(done)=>{
 
@@ -31,9 +33,20 @@ describe('Test ItemType CRUD', () => {
                 // Item Type 3
                 itemTypeRepo.insertItemType(itemType3)
                 .then((result)=>{
+                    
                     expect(result._id.toString()).toBe(idToTest3);
-                    done();
-                },(err)=>{
+                    
+                    // Item Type 4
+                    itemTypeRepo.insertItemType(itemType4)
+                    .then((result)=>{
+                            
+                        expect(result._id.toString()).toBe(idToTest4);
+                        done();
+
+                        },(err)=>{
+                            return done(err);
+                        });
+                    },(err)=>{
                     return done(err);
                 });
 
@@ -49,7 +62,7 @@ describe('Test ItemType CRUD', () => {
     it('should get first item type',(done)=>{
         itemTypeRepo.getFirstItemType(new ItemType({_id:idToTest1}))
         .then((result)=>{
-            expect(result.name).toBe('ItemTypeTest');
+            expect(result.name).toBe('ItemTypeTest1');
             expect(result._id.toString()).toBe(idToTest1);
             done();
         },(err)=>{
@@ -58,7 +71,7 @@ describe('Test ItemType CRUD', () => {
     });
 
     it('should get all item types',(done)=>{
-        itemTypeRepo.getAllItemTypes({name:'ItemTypeTest'})
+        itemTypeRepo.getAllItemTypes({name:'ItemTypeTest1'})
         .then((results)=>{
             expect(results.length).toBe(3);
             expect(results[0]._id.toString()).toBe(idToTest1);
@@ -71,11 +84,11 @@ describe('Test ItemType CRUD', () => {
     });
 
     it('should delete first item type and check that 2 remained',(done)=>{
-        itemTypeRepo.deleteFirstItemType({name:'ItemTypeTest'})
+        itemTypeRepo.deleteFirstItemType({name:'ItemTypeTest1'})
         .then((result)=>{
             expect(result._id.toString()).toBe(idToTest1);
             
-            itemTypeRepo.getAllItemTypes({name:'ItemTypeTest'})
+            itemTypeRepo.getAllItemTypes({name:'ItemTypeTest1'})
             .then((results)=>{
                 expect(results.length).toBe(2);
                 expect(results[0]._id.toString()).toBe(idToTest2);
@@ -90,7 +103,47 @@ describe('Test ItemType CRUD', () => {
         });
     });
 
-    // TODO: Add tests for update single and update multiple
+    it('should update first item type and check it was updated',(done)=>{
+
+        itemTypeRepo.updateFirstItemType({name:'ItemTypeTest2'},{name:'ItemTypeTest1'})
+        .then((results)=>{
+
+            itemTypeRepo.getAllItemTypes({name:'ItemTypeTest1'})
+            .then((results)=>{
+                expect(results.length).toBe(3);
+                expect(results[0]._id.toString()).toBe(idToTest2);
+                expect(results[1]._id.toString()).toBe(idToTest3);
+                expect(results[2]._id.toString()).toBe(idToTest4);
+                done();
+            },(err)=>{
+                done(err);
+            });
+
+        },(err)=>{
+            done(err);
+        });
+    });
+
+    it('should update all item types and check they were updated',(done)=>{
+
+        itemTypeRepo.updateAllItemTypes({name:'ItemTypeTest1'},{name:'ItemTypeTest'})
+        .then((results)=>{
+
+            itemTypeRepo.getAllItemTypes({name:'ItemTypeTest'})
+            .then((results)=>{
+                expect(results.length).toBe(3);
+                expect(results[0]._id.toString()).toBe(idToTest2);
+                expect(results[1]._id.toString()).toBe(idToTest3);
+                expect(results[2]._id.toString()).toBe(idToTest4);
+                done();
+            },(err)=>{
+                done(err);
+            });
+
+        },(err)=>{
+            done(err);
+        });
+    });
 
     it('should delete all item types and check that none remained',(done)=>{
         itemTypeRepo.deleteAllItemTypes({name:'ItemTypeTest'})

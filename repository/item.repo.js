@@ -1,17 +1,24 @@
 const {Item} = require('../db.models/item');
+const {ItemType} = require('../db.models/itemType');
 
 // Create
-let insertItem = (item) => {
+let insertItem = (item) => 
+{
     return item.save();
 };
 
 // Read
-let getFirstItem = (query) => {
+let getFirstItem = (query) => 
+{
     return Item.findOne(query);
 };
 
-let getItems = (query) => {
+let getAllItems = (query) => {
     return Item.find(query);
+};
+
+let getItemsByItemType = (query) => {
+    return ItemType.findOne(query).populate(Item.modelName.toLowerCase()+'s').exec();
 };
 
 // Update
@@ -34,7 +41,8 @@ let deleteAllItems = (query) => {
 
 module.exports = {insertItem, 
                 getFirstItem, 
-                getItems, 
+                getAllItems, 
+                getItemsByItemType,
                 updateFirstItem, 
                 updateAllItems,
                 deleteAllItems,
