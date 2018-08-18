@@ -13,11 +13,18 @@ let getFirstItem = (query) =>
     return Item.findOne(query);
 };
 
-let getAllItems = (query) => {
+let getItems = (query) => 
+{
     return Item.find(query);
 };
 
-let getItemsByItemType = (query) => {
+let getAllItems = () => 
+{
+    return Item.find({});
+};
+
+let getItemsByItemType = (query) => 
+{
     return ItemType.findOne(query).populate(Item.modelName.toLowerCase()+'s').exec();
 };
 
@@ -26,8 +33,12 @@ let updateFirstItem = (query,updateValues) => {
     return Item.update(query,updateValues);
 };
 
-let updateAllItems = (query,updateValues) => {
+let updateItems = (query,updateValues) => {
     return Item.updateMany(query,updateValues);
+};
+
+let updateAllItems = (updateValues) => {
+    return Item.updateMany({},updateValues);
 };
 
 // Delete
@@ -35,15 +46,22 @@ let deleteFirstItem = (query) => {
     return Item.findOneAndDelete(query);
 };
 
-let deleteAllItems = (query) => {
+let deleteItems = (query) => {
     return Item.deleteMany(query);
+};
+
+let deleteAllItems = () => {
+    return Item.deleteMany({});
 };
 
 module.exports = {insertItem, 
                 getFirstItem, 
+                getItems,
                 getAllItems, 
                 getItemsByItemType,
                 updateFirstItem, 
+                updateItems,
                 updateAllItems,
+                deleteItems,
                 deleteAllItems,
                 deleteFirstItem};

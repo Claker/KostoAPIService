@@ -66,12 +66,12 @@ describe('Test ItemType CRUD', () => {
             expect(result._id.toString()).toBe(idToTest1);
             done();
         },(err)=>{
-            done(err);
+            return done(err);
         });
     });
 
     it('should get all item types',(done)=>{
-        itemTypeRepo.getAllItemTypes({name:'ItemTypeTest1'})
+        itemTypeRepo.getItemTypes({name:'ItemTypeTest1'})
         .then((results)=>{
             expect(results.length).toBe(3);
             expect(results[0]._id.toString()).toBe(idToTest1);
@@ -79,7 +79,7 @@ describe('Test ItemType CRUD', () => {
             expect(results[2]._id.toString()).toBe(idToTest3);
             done();
         },(err)=>{
-            done(err);
+            return done(err);
         });
     });
 
@@ -88,16 +88,15 @@ describe('Test ItemType CRUD', () => {
         .then((result)=>{
             expect(result._id.toString()).toBe(idToTest1);
             
-            itemTypeRepo.getAllItemTypes({name:'ItemTypeTest1'})
+            itemTypeRepo.getItemTypes({name:'ItemTypeTest1'})
             .then((results)=>{
                 expect(results.length).toBe(2);
                 expect(results[0]._id.toString()).toBe(idToTest2);
                 expect(results[1]._id.toString()).toBe(idToTest3);
                 done();
             },(err)=>{
-                done(err);
+                return done(err);
             });
-
         },(err)=>{
             return done(err);
         });
@@ -108,7 +107,7 @@ describe('Test ItemType CRUD', () => {
         itemTypeRepo.updateFirstItemType({name:'ItemTypeTest2'},{name:'ItemTypeTest1'})
         .then((results)=>{
 
-            itemTypeRepo.getAllItemTypes({name:'ItemTypeTest1'})
+            itemTypeRepo.getItemTypes({name:'ItemTypeTest1'})
             .then((results)=>{
                 expect(results.length).toBe(3);
                 expect(results[0]._id.toString()).toBe(idToTest2);
@@ -116,20 +115,20 @@ describe('Test ItemType CRUD', () => {
                 expect(results[2]._id.toString()).toBe(idToTest4);
                 done();
             },(err)=>{
-                done(err);
+                return done(err);
             });
 
         },(err)=>{
-            done(err);
+            return done(err);
         });
     });
 
     it('should update all item types and check they were updated',(done)=>{
 
-        itemTypeRepo.updateAllItemTypes({name:'ItemTypeTest1'},{name:'ItemTypeTest'})
+        itemTypeRepo.updateItemTypes({name:'ItemTypeTest1'},{name:'ItemTypeTest'})
         .then((results)=>{
 
-            itemTypeRepo.getAllItemTypes({name:'ItemTypeTest'})
+            itemTypeRepo.getItemTypes({name:'ItemTypeTest'})
             .then((results)=>{
                 expect(results.length).toBe(3);
                 expect(results[0]._id.toString()).toBe(idToTest2);
@@ -137,26 +136,24 @@ describe('Test ItemType CRUD', () => {
                 expect(results[2]._id.toString()).toBe(idToTest4);
                 done();
             },(err)=>{
-                done(err);
+                return done(err);
             });
-
         },(err)=>{
-            done(err);
+            return done(err);
         });
     });
 
     it('should delete all item types and check that none remained',(done)=>{
-        itemTypeRepo.deleteAllItemTypes({name:'ItemTypeTest'})
+        itemTypeRepo.deleteItemTypes({name:'ItemTypeTest'})
         .then((results)=>{
             
-            itemTypeRepo.getAllItemTypes({name:'ItemTypeTest'})
+            itemTypeRepo.getItemTypes({name:'ItemTypeTest'})
             .then((results)=>{
                 expect(results.length).toBe(0);
                 done();
             },(err)=>{
-                done(err);
+                return done(err);
             });
-
         },(err)=>{
             return done(err);
         });

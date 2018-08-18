@@ -1,25 +1,35 @@
 const {City} = require('../db.models/city');
 
 // Create
-let insertCity = (city) => {
+let insertCity = (city) => 
+{
     return city.save();
 };
 
 // Read
-let getFirstCity = (query) => {
+let getFirstCity = (query) => 
+{
     return City.findOne(query);
 };
 
-let getCities = (query) => {
+let getCities = (query) => 
+{
     return City.find(query);
 };
 
+let getAllCities = () => 
+{
+    return City.find({});
+};
+
 // Update
-let updateFirstCity = (query,updateValues) => {
+let updateFirstCity = (query,updateValues) => 
+{
     return City.update(query,updateValues);
 };
 
-let updateAllCities = (query,updateValues) => {
+let updateAllCities = (query,updateValues) => 
+{
     return City.updateMany(query,updateValues);
 };
 
@@ -35,6 +45,7 @@ let deleteAllCities = (query) => {
 module.exports = {insertCity, 
                 getFirstCity, 
                 getCities, 
+                getAllCities,
                 updateFirstCity, 
                 updateAllCities,
                 deleteAllCities,
