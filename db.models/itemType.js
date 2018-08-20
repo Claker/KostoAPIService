@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const {Item} = require('./item');
+const {Item, ItemModelName, ItemVirtualsName} = require('./item');
+const ItemTypeModelName = 'ItemType'; // for bidirectional dependency because of declaring virtuals
 
 // define schema
 const ItemTypeSchema = new Schema({
@@ -8,13 +9,13 @@ const ItemTypeSchema = new Schema({
 });
 
 ItemTypeSchema.virtual('items', {
-    ref: Item.modelName,
+    ref: 'Item',
     localField: '_id', // Find items where `localField`
     foreignField: 'itemType', // is equal to `foreignField`
 });
 
 // create model
-let ItemType = mongoose.model('ItemType',ItemTypeSchema);
+let ItemType = mongoose.model(ItemTypeModelName,ItemTypeSchema);
 
 // export
-module.exports = {ItemType};
+module.exports = {ItemType, ItemTypeModelName};

@@ -1,4 +1,6 @@
-const {City} = require('../db.models/city');
+const {City, CityVirtualsName} = require('../db.models/city');
+const {Country} = require('../db.models/country');
+const {Currency} = require('../db.models/currency');
 
 // Create
 let insertCity = (city) => 
@@ -22,15 +24,30 @@ let getAllCities = () =>
     return City.find({});
 };
 
+let getCitiesByCountry = (query) => 
+{
+    return Country.findOne(query).populate('cities').exec();
+};
+
+let getCitiesByCurrency = (query) => 
+{
+    return Currency.findOne(query).populate('cities').exec();
+};
+
 // Update
 let updateFirstCity = (query,updateValues) => 
 {
     return City.update(query,updateValues);
 };
 
-let updateAllCities = (query,updateValues) => 
+let updateCities = (query,updateValues) => 
 {
     return City.updateMany(query,updateValues);
+};
+
+let updateAllCities = (updateValues) => 
+{
+    return City.updateMany({},updateValues);
 };
 
 // Delete
@@ -38,15 +55,24 @@ let deleteFirstCity = (query) => {
     return City.findOneAndDelete(query);
 };
 
-let deleteAllCities = (query) => {
+let deleteCities = (query) => {
     return City.deleteMany(query);
+};
+
+let deleteAllCities = () => {
+    return City.deleteMany({});
 };
 
 module.exports = {insertCity, 
                 getFirstCity, 
                 getCities, 
                 getAllCities,
+                getCitiesByCountry,
+                getCitiesByCurrency,
                 updateFirstCity, 
+                updateCities,
                 updateAllCities,
+                deleteFirstCity,
+                deleteCities,
                 deleteAllCities,
-                deleteFirstCity};
+                };

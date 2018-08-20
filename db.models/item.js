@@ -1,12 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const {ItemType} = require('./itemType');
+const {ItemType, ItemTypeModelName} = require('./itemType');
+const ItemModelName = 'Item'; // for bidirectional dependency because of declaring virtuals
+const ItemVirtualsName = 'items';
 
 // define schema
 const ItemSchema = new Schema({
     name: { type : String, 
             required : [ true, 'Item Name is required.'] },
-    itemType: { type : mongoose.Schema.Types.ObjectId, ref: 'ItemType' , 
+    itemType: { type : mongoose.Schema.Types.ObjectId, ref: ItemTypeModelName ,
                 required : [ true, 'Item Type is required.'] },
     isDefaultItem: { type: Boolean, 
                      required : [true, 'Is Default Item is required.'],
@@ -14,7 +16,7 @@ const ItemSchema = new Schema({
 });
 
 // create model
-let Item = mongoose.model('Item', ItemSchema);
+let Item = mongoose.model(ItemModelName, ItemSchema);
 
 // export
-module.exports = {Item};
+module.exports = {Item, ItemModelName, ItemVirtualsName};

@@ -1,20 +1,22 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const {Country} = require('./country');
-const {Currency} = require('./currency');
+const {Country, CountryModelName} = require('./country');
+const {Currency, CurrencyModelName} = require('./currency'); 
+const CityModelName = 'City'; // for bidirectional dependency because of declaring virtuals
+const CityVirtualsName = 'cities'; 
 
 // define schema
 const CitySchema = new Schema({
     name: { type : String, 
             required : [ true, 'City Name is required.'] },
-    currency: { type : mongoose.Schema.Types.ObjectId, ref: Currency.modelName , 
+    currency: { type : mongoose.Schema.Types.ObjectId, ref: CurrencyModelName,
                 required : [ true, 'Currency is required.'] },
-    country: { type: mongoose.Schema.Types.ObjectId, ref: Country.modelName, 
+    country: { type: mongoose.Schema.Types.ObjectId, ref: CountryModelName, 
                      required : [true, 'Country is required.'] },
 });
 
 // create model
-let City = mongoose.model('City', CitySchema);
+let City = mongoose.model(CityModelName, CitySchema);
 
 // export
-module.exports = {City};
+module.exports = {City,CityModelName,CityVirtualsName};

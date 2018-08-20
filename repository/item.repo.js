@@ -29,28 +29,34 @@ let getItemsByItemType = (query) =>
 };
 
 // Update
-let updateFirstItem = (query,updateValues) => {
+let updateFirstItem = (query,updateValues) => 
+{
     return Item.update(query,updateValues);
 };
 
-let updateItems = (query,updateValues) => {
+let updateItems = (query,updateValues) => 
+{
     return Item.updateMany(query,updateValues);
 };
 
-let updateAllItems = (updateValues) => {
+let updateAllItems = (updateValues) => 
+{
     return Item.updateMany({},updateValues);
 };
 
 // Delete
-let deleteFirstItem = (query) => {
+let deleteFirstItem = (query) => 
+{
     return Item.findOneAndDelete(query);
 };
 
-let deleteItems = (query) => {
+let deleteItems = (query) => 
+{
     return Item.deleteMany(query);
 };
 
-let deleteAllItems = () => {
+let deleteAllItems = () => 
+{
     return Item.deleteMany({});
 };
 
@@ -62,6 +68,7 @@ module.exports = {insertItem,
                 updateFirstItem, 
                 updateItems,
                 updateAllItems,
+                deleteFirstItem,
                 deleteItems,
                 deleteAllItems,
-                deleteFirstItem};
+                };

@@ -61,6 +61,7 @@ module.exports = {insertCurrency,
                 updateFirstCurrency, 
                 updateCurrencies,
                 updateAllCurrencies,
+                deleteFirstCurrency,
                 deleteCurrencies,
                 deleteAllCurrencies,
-                deleteFirstCurrency};
+                };

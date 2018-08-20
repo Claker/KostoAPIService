@@ -23,7 +23,8 @@ let getAllItemTypes = () =>
 };
 
 // Update
-let updateFirstItemType = (query,updateValues) => {
+let updateFirstItemType = (query,updateValues) => 
+{
     return ItemType.update(query,updateValues);
 };
 
@@ -62,4 +63,5 @@ module.exports = {insertItemType,
                 updateAllItemTypes,
                 deleteFirstItemType,
                 deleteItemTypes,
-                deleteAllItemTypes};
+                deleteAllItemTypes,
+                };
