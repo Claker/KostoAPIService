@@ -26,12 +26,12 @@ let getAllCities = () =>
 
 let getCitiesByCountry = (query) => 
 {
-    return Country.findOne(query).populate('cities').exec();
+    return Country.findOne(query).populate(CityVirtualsName).exec();
 };
 
 let getCitiesByCurrency = (query) => 
 {
-    return Currency.findOne(query).populate('cities').exec();
+    return Currency.findOne(query).populate(CityVirtualsName).exec();
 };
 
 // Update

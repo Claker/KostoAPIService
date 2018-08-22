@@ -22,55 +22,24 @@ describe('Test Item CRUD', () => {
     let item3 = new Item({_id:idToTest5, name:'ItemTest3',itemType:idToTest2});
 
     it('should insert items',(done)=>{
+        (async () =>{
 
-        // Item Type 1
-        itemTypeRepo.insertItemType(itemType1)
-        .then((result)=>{
+            let itemType1Res = await itemTypeRepo.insertItemType(itemType1);
+            expect(itemType1Res._id.toString()).toBe(idToTest1);
 
-            expect(result._id.toString()).toBe(idToTest1);
+            let itemType2Res = await itemTypeRepo.insertItemType(itemType2);
+            expect(itemType2Res._id.toString()).toBe(idToTest2);
 
-            // Item Type 2
-            itemTypeRepo.insertItemType(itemType2)
-            .then((result)=>{
+            let item1Res = await itemRepo.insertItem(item1);
+            expect(item1Res._id.toString()).toBe(idToTest3);
 
-                expect(result._id.toString()).toBe(idToTest2);
+            let item2Res = await itemRepo.insertItem(item2);
+            expect(item2Res._id.toString()).toBe(idToTest4);
 
-                // Item 1
-                itemRepo.insertItem(item1)
-                .then((result)=>{
-                    
-                    expect(result._id.toString()).toBe(idToTest3);
-                    
-                    // Item 2
-                    itemRepo.insertItem(item2)
-                    .then((result)=>{
-                            
-                        expect(result._id.toString()).toBe(idToTest4);
-                        
-                        // Item 3
-                        itemRepo.insertItem(item3)
-                        .then((result)=>{
-                            
-                            expect(result._id.toString()).toBe(idToTest5);
+            let item3Res = await itemRepo.insertItem(item3);
+            expect(item3Res._id.toString()).toBe(idToTest5);
 
-                            done();
-
-                        },(err)=>{});
-
-                        },(err)=>{
-                            return done(err);
-                        });
-                    },(err)=>{
-                    return done(err);
-                });
-
-            },(err)=>{
-                return done(err);
-            });
-
-        },(err)=>{
-            return done(err);
-        });
+        })().then((res)=>done(),(err)=>done(err));
     });
     
     it('should get second item',(done)=>{
@@ -78,11 +47,9 @@ describe('Test Item CRUD', () => {
             .then((item) => {        
 
                 expect(item._id.toString()).toBe(idToTest3);
-
                 done();
-            },(err)=>{
-                return done(err);
-            });
+
+            },(err)=> done(err));
     });
 
     it('should get first item type with list of items',(done)=>{
@@ -92,11 +59,9 @@ describe('Test Item CRUD', () => {
                 expect(itemType.items.length).toBe(2);
                 expect(itemType.items[0]._id.toString()).toBe(idToTest3);
                 expect(itemType.items[1]._id.toString()).toBe(idToTest4);       
-
                 done();
-            },(err)=>{
-                return done(err);
-            });
+
+            },(err)=>done(err));
     });
 
     it('should delete second item',(done)=>{
@@ -104,11 +69,9 @@ describe('Test Item CRUD', () => {
             .then((item) => {        
 
                 expect(item._id.toString()).toBe(idToTest4);
-
                 done();
-            },(err)=>{
-                return done(err);
-            });
+
+            },(err)=> done(err) );
     });
 
     it('should get items',(done)=>{
@@ -117,83 +80,44 @@ describe('Test Item CRUD', () => {
 
                 expect(items.length).toBe(1);
                 expect(items[0]._id.toString()).toBe(idToTest3);
-
                 done();
-            },(err)=>{
-                return done(err);
-            });
+
+            },(err)=> done(err) );
     });
 
     it('should update first item',(done)=>{
-        itemRepo.updateFirstItem({name:'ItemTest3'},{name:'ItemTest1'})
-            .then((item) => {        
+        (async ()=>{
+            
+            await itemRepo.updateFirstItem({name:'ItemTest3'},{name:'ItemTest1'});
+            let itemsRes = await itemRepo.getItems({name:'ItemTest1'});
 
-                itemRepo.getItems({name:'ItemTest1'}).then((items)=>{
+            expect(itemsRes.length).toBe(2);
+            expect(itemsRes[1]._id.toString()).toBe(idToTest5);
 
-                    expect(items.length).toBe(2);
-                    expect(items[1]._id.toString()).toBe(idToTest5);
-
-                    done();
-
-                },(err)=>{
-                    return done(err);
-                });
-            },(err)=>{
-                return done(err);
-            });
+        })().then((res)=>done(),(err)=>done(err));
     });
 
     it('should update all items',(done)=>{
-        itemRepo.updateItems({name:'ItemTest1'},{name:'ItemTest2'})
-            .then((items) => {        
+        (async ()=>{
 
-                itemRepo.getItems({name:'ItemTest2'}).then((items)=>{
+            await itemRepo.updateItems({name:'ItemTest1'},{name:'ItemTest2'});
+            let itemsRes = await itemRepo.getItems({name:'ItemTest2'});
+            expect(itemsRes.length).toBe(2);
+            expect(itemsRes[1]._id.toString()).toBe(idToTest5);
 
-                    expect(items.length).toBe(2);
-                    expect(items[1]._id.toString()).toBe(idToTest5);
-
-                    done();
-                    
-                },(err)=>{
-                    return done(err);
-                });
-            },(err)=>{
-                return done(err);
-            });
+        })().then((res)=>done(),(err)=>done(err));
     });
 
     it('should delete all items and itemTypes',(done)=>{
-        itemRepo.deleteItems({name:'ItemTest2'})
-            .then((items) => {        
+        (async ()=>{
+            await itemRepo.deleteItems({name:'ItemTest2'});
+            let itemsRes = await itemRepo.getAllItems();
+            expect(itemsRes.length).toBe(0);
+            
+            await itemTypeRepo.deleteItemTypes({name:'ItemTypeTest1'});
+            let itemTypesRes = await itemTypeRepo.getAllItemTypes();
+            expect(itemTypesRes.length).toBe(0);
 
-                itemRepo.getAllItems().then((items)=>{
-
-                    expect(items.length).toBe(0);
-
-                    itemTypeRepo.deleteItemTypes({name:'ItemTypeTest1'})
-                    .then((items)=>{
-
-                        itemTypeRepo.getAllItemTypes()
-                        .then((itemTypes)=>{
-                            
-                            expect(itemTypes.length).toBe(0);
-                            
-                            done();
-
-                        },(err)=>{
-                            return done(err);
-                        });
-
-                    },(err)=>{
-                        return done(err);
-                    });
-                    
-                },(err)=>{
-                    return done(err);
-                });
-
-            },(err)=>{
-                return done(err);
-            });
+        })().then((res)=>done(),(err)=>done(err));
     });
 });

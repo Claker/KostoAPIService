@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const {ItemType, ItemTypeModelName} = require('./itemType');
+const {ItemTypeModelName} = require('./itemType');
 const ItemModelName = 'Item'; // for bidirectional dependency because of declaring virtuals
 const ItemVirtualsName = 'items';
 

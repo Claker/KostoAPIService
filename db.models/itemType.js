@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const {Item, ItemModelName, ItemVirtualsName} = require('./item');
+const {ItemModelName, ItemVirtualsName} = require('./item');
 const ItemTypeModelName = 'ItemType'; // for bidirectional dependency because of declaring virtuals
 
 // define schema
@@ -8,8 +8,8 @@ const ItemTypeSchema = new Schema({
     name : { type : String, required : [ true, 'Item Type name is required.' ] }
 });
 
-ItemTypeSchema.virtual('items', {
-    ref: 'Item',
+ItemTypeSchema.virtual(ItemVirtualsName, {
+    ref: ItemModelName,
     localField: '_id', // Find items where `localField`
     foreignField: 'itemType', // is equal to `foreignField`
 });

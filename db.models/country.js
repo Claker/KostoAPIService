@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const {City, CityModelName, CityVirtualsName} = require('./city');
+const {CityModelName, CityVirtualsName} = require('./city');
 const CountryModelName = 'Country'; // for bidirectional dependency because of declaring virtuals
 
 // define schema

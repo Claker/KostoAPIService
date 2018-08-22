@@ -83,7 +83,7 @@ describe('Test Country CRUD', () => {
     it('should update all countries and check they were updated',(done)=>{
         (async ()=>{
             await countryRepo.updateAllCountries({name:'Romania'});
-            let countries = countryRepo.getCountries({name:'Romania'});
+            let countries = await countryRepo.getCountries({name:'Romania'});
 
             expect(countries.length).toBe(3);
             expect(countries[0]._id.toString()).toBe(idToTest1);
@@ -98,7 +98,7 @@ describe('Test Country CRUD', () => {
 
             await countryRepo.deleteCountries({name:'Romania'});
             let countries = await countryRepo.getAllCountries();
-            expect(results.length).toBe(0);
+            expect(countries.length).toBe(0);
 
         })().then((res)=>done(),(err)=>done(err));
     });

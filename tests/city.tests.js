@@ -124,7 +124,7 @@ describe('Test City CRUD', () => {
         (async ()=>{
             
             await cityRepo.updateFirstCity({name:'Timisoara'},{name:'Auckland'});
-            let cities = await cityRepo.getCities({name:'Auckland'})
+            let cities = await cityRepo.getCities({name:'Auckland'});
             
             expect(cities.length).toBe(2);
             expect(cities[0]._id.toString()).toBe(idToTest5);
