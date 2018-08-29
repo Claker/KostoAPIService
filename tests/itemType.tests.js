@@ -1,8 +1,9 @@
 const expect = require('expect');
-const mongoose = require('../repository/mongoose');
+const mongoose = require('./mongooseTests');
 
 const itemTypeRepo = require('../repository/itemType.repo');
-const {ItemType} = require('../db.models/itemType');
+const itemType = require('../db.models/itemType');
+const ItemType = itemType.ItemType;
 
 describe('Test ItemType CRUD', () => {
 
@@ -15,6 +16,11 @@ describe('Test ItemType CRUD', () => {
     let itemType2 = new ItemType({_id:idToTest2, name:'ItemTypeTest1'});
     let itemType3 = new ItemType({_id:idToTest3, name:'ItemTypeTest1'});
     let itemType4 = new ItemType({_id:idToTest4, name:'ItemTypeTest2'});
+
+    before(()=>
+    {
+        itemType.InjectMongoose(mongoose);
+    });
 
     it('should insert item types',(done)=>{
         (async ()=>{

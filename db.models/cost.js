@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+let mongoose = require('mongoose');
 require('mongoose-double')(mongoose);
 const SchemaTypes = mongoose.Schema.Types;
 const Schema = mongoose.Schema;
@@ -6,6 +6,7 @@ const {Item} = require('./item');
 const {City} = require('./city');
 const {Currency} = require('./currency');
 
+let InjectMongoose = (mongooseOther) => { mongoose = mongooseOther };
 
 // define schema
 const CostSchema = new Schema({
@@ -23,4 +24,4 @@ const CostSchema = new Schema({
 let Cost = mongoose.model('Cost', CostSchema);
 
 // export
-module.exports = {Cost};
+module.exports = {Cost, InjectMongoose};

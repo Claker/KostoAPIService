@@ -1,16 +1,18 @@
 const expect = require('expect');
-const mongoose = require('../repository/mongoose');
+const mongoose = require('./mongooseTests');
 
 const cityRepo = require('../repository/city.repo');
-const {City} = require('../db.models/city');
+const city = require('../db.models/city');
+const City = city.City;
 
 const countryRepo = require('../repository/country.repo');
-const {Country} = require('../db.models/country');
+const country = require('../db.models/country');
+const Country = country.Country;
 
 const currencyRepo = require('../repository/currency.repo');
-const {Currency} = require('../db.models/currency');
-// +40 724 150 053 - buni
-// +40 731 754 460 - tata
+const currency = require('../db.models/currency');
+const Currency = currency.Currency;
+
 describe('Test City CRUD', () => {
 
     let idToTest1 = '53cb6b9b4f4ddef1ad47f966';
@@ -29,6 +31,17 @@ describe('Test City CRUD', () => {
     let city2 = new City({_id:idToTest6, name:'Deva', country:idToTest1, currency: idToTest3});
     let city3 = new City({_id:idToTest7, name:'Auckland', country:idToTest2, currency: idToTest4});
 
+    before(()=>
+    {
+        city.InjectMongoose(mongoose);
+        country.InjectMongoose(mongoose);
+        currency.InjectMongoose(mongoose);
+    });
+
+    // after(()=>{
+    //     mongoose.connection.close();
+    //     mongoose.connection.db.dropDatabase(()=>{console.log('asdasda')});
+    // });
 
     it('should insert cities', (done)=>{
         (async () => {

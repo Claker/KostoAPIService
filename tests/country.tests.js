@@ -1,8 +1,9 @@
 const expect = require('expect');
-const mongoose = require('../repository/mongoose');
+const mongoose = require('./mongooseTests');
 
-const {Country} = require('../db.models/country');
 const countryRepo = require('../repository/country.repo');
+const country = require('../db.models/country');
+const Country = country.Country;
 
 describe('Test Country CRUD', () => {
 
@@ -15,6 +16,11 @@ describe('Test Country CRUD', () => {
     let country2 = new Country({_id:idToTest2, name:'New Zealand'});
     let country3 = new Country({_id:idToTest3, name:'Romania'});
     let country4 = new Country({_id:idToTest4, name:'Germany'});
+
+    before(()=>
+    {
+        country.InjectMongoose(mongoose);
+    });
 
     it('should insert countries',(done)=>{
         (async() => {

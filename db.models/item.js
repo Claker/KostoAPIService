@@ -1,8 +1,10 @@
-const mongoose = require('mongoose');
+let mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const {ItemTypeModelName} = require('./itemType');
 const ItemModelName = 'Item'; // for bidirectional dependency because of declaring virtuals
 const ItemVirtualsName = 'items';
+
+let InjectMongoose = (mongooseOther) => { mongoose = mongooseOther };
 
 // define schema
 const ItemSchema = new Schema({
@@ -25,4 +27,4 @@ ItemSchema.virtual('costs', {
 let Item = mongoose.model(ItemModelName, ItemSchema);
 
 // export
-module.exports = {Item, ItemModelName, ItemVirtualsName};
+module.exports = {Item, ItemModelName, ItemVirtualsName, InjectMongoose};

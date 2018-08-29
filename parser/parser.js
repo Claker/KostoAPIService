@@ -14,8 +14,6 @@ let getExpatistanMilkPrice = (link) =>
 {
     // return xray(link,
     // '.single-city tbody tr:nth-child(5) td.price')  ;
-    // return xray(link, '.single-city tbody');
-    // return xray(link,'.prices');
     return xray(link,'.blocks');
 }
 

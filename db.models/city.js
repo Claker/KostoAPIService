@@ -1,9 +1,11 @@
-const mongoose = require('mongoose');
+let mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const {CurrencyModelName} = require('./currency'); 
 const {CountryModelName} = require('./country');
 const CityModelName = 'City'; // for bidirectional dependency because of declaring virtuals
 const CityVirtualsName = 'cities'; 
+
+let InjectMongoose = (mongooseOther) => { mongoose = mongooseOther };
 
 // define schema
 const CitySchema = new Schema({
@@ -25,4 +27,4 @@ CitySchema.virtual('costs', {
 let City = mongoose.model(CityModelName, CitySchema);
 
 // export
-module.exports = {City,CityModelName,CityVirtualsName};
+module.exports = {City,CityModelName,CityVirtualsName, InjectMongoose};
