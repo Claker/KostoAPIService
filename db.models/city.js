@@ -15,6 +15,12 @@ const CitySchema = new Schema({
                      required : [true, 'Country is required.'] },
 });
 
+CitySchema.virtual('costs', {
+        ref: 'Cost',
+        localField: '_id', // Find items where `localField`
+        foreignField: 'city', // is equal to `foreignField`
+});
+
 // create model
 let City = mongoose.model(CityModelName, CitySchema);
 

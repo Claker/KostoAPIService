@@ -15,6 +15,12 @@ const ItemSchema = new Schema({
                         default: false },
 });
 
+ItemSchema.virtual('costs', {
+        ref: 'Cost',
+        localField: '_id', // Find items where `localField`
+        foreignField: 'item', // is equal to `foreignField`
+});
+
 // create model
 let Item = mongoose.model(ItemModelName, ItemSchema);
 

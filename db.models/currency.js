@@ -16,6 +16,12 @@ CurrencySchema.virtual('cities', {
     foreignField: 'currency', // is equal to `foreignField`
 });
 
+CurrencySchema.virtual('costs', {
+    ref: 'Cost',
+    localField: '_id', // Find items where `localField`
+    foreignField: 'currency', // is equal to `foreignField`
+});
+
 // create model
 let Currency = mongoose.model(CurrencyModelName, CurrencySchema);
 
