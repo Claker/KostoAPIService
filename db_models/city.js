@@ -1,9 +1,6 @@
 let mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const {CurrencyModelName} = require('./currency'); 
-const {CountryModelName} = require('./country');
-const CityModelName = 'City'; // for bidirectional dependency because of declaring virtuals
-const CityVirtualsName = 'cities'; 
+const constants = require('../constants').Models;
 
 let InjectMongoose = (mongooseOther) => { mongoose = mongooseOther };
 
@@ -11,20 +8,20 @@ let InjectMongoose = (mongooseOther) => { mongoose = mongooseOther };
 const CitySchema = new Schema({
     name: { type : String, 
             required : [ true, 'City Name is required.'] },
-    currency: { type : mongoose.Schema.Types.ObjectId, ref: CurrencyModelName,
+    currency: { type : mongoose.Schema.Types.ObjectId, ref: constants.Currency.CurrencyModelName,
                 required : [ true, 'Currency is required.'] },
-    country: { type: mongoose.Schema.Types.ObjectId, ref: CountryModelName, 
+    country: { type: mongoose.Schema.Types.ObjectId, ref: constants.Country.CountryModelName, 
                      required : [true, 'Country is required.'] },
 });
 
-CitySchema.virtual('costs', {
-        ref: 'Cost',
+CitySchema.virtual(constants.Cost.CostVirtualsName, {
+        ref: constants.Cost.CostModelName,
         localField: '_id', // Find items where `localField`
         foreignField: 'city', // is equal to `foreignField`
 });
 
 // create model
-let City = mongoose.model(CityModelName, CitySchema);
+let City = mongoose.model(constants.City.CityModelName, CitySchema);
 
 // export
-module.exports = {City,CityModelName,CityVirtualsName, InjectMongoose};
+module.exports = {City, InjectMongoose};

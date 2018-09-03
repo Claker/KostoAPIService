@@ -1,17 +1,10 @@
 const {Expat, KostoRegex} = require('../constants');
 
-function extractPrice(priceString)
-{
-    // in case the number has the format like 12,132.12 remove commas
-    priceString = priceString.replace(',','');
-    return parseFloat(priceString.match(KostoRegex.IntAndFloatsRegex));
-}
-
 let GetParsedPrices = (fullText) =>
 {
     let prices = new Object();
 
-    let a0 = fullText.split('Change the currency:')[0].split('Cost of living in')[1].split(',');
+    let a0 = fullText.split(Expat.ChangeTheCurrency)[0].split(Expat.CostOfLiving)[1].split(',');
 
     prices.city = a0[0].trim();
     prices.country = a0[1].trim();
@@ -56,13 +49,20 @@ let GetParsedPrices = (fullText) =>
     let a12 = a11[1].split(Expat.BreadSupermarket);
     prices.cocaCola2L = extractPrice(a12[0].trim());
 
-    let a13 = a12[1].split('Housing');
+    let a13 = a12[1].split(Expat.Housing);
     prices.breadSupermarket = extractPrice(a13[0].trim());
 
     printPricesToConsole(prices);
 
     return prices;
 };
+
+function extractPrice(priceString)
+{
+    // in case the number has the format like 12,132.12 remove commas
+    priceString = priceString.replace(',','');
+    return parseFloat(priceString.match(KostoRegex.IntAndFloatsRegex));
+}
 
 function printPricesToConsole(prices)
 {
@@ -79,9 +79,9 @@ function printPricesToConsole(prices)
     console.log(Expat.WineRedGoodQuality,':'+prices.wineRedGoodQuality);
     console.log(Expat.CocaCola2L,':'+prices.cocaCola2L);
     console.log(Expat.BreadSupermarket,':'+prices.breadSupermarket);
-    console.log('Currency', prices.currency);
-    console.log('City', prices.city);
-    console.log('Country', prices.country);
+    console.log(Expat.Currency, prices.currency);
+    console.log(Expat.City, prices.city);
+    console.log(Expat.Country, prices.country);
 }
 
 module.exports={GetParsedPrices};

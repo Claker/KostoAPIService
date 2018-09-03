@@ -1,10 +1,11 @@
 const mongoose = require('../repository/mongoose');
+const costRepo = require('../repository/cost.repo');
 const cityRepo = require('../repository/city.repo');
 const stringSimilarity = require('string-similarity');
 
 async function FindCityInDB(cityName)
 {
-    let city = await cityRepo.getFirstCity({name:cityName});
+    let city = await costRepo.getFirstCityWithCosts({name:cityName});
 
     if(!city)
     {

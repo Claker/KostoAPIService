@@ -2,7 +2,7 @@ const expect = require('expect');
 const mongoose = require('./mongooseTests');
 
 const currencyRepo = require('../repository/currency.repo');
-const currency = require('../db.models/currency');
+const currency = require('../db_models/currency');
 const Currency = currency.Currency;
 
 describe('Test Currency CRUD', () => {

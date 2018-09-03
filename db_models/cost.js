@@ -2,9 +2,7 @@ let mongoose = require('mongoose');
 require('mongoose-double')(mongoose);
 const SchemaTypes = mongoose.Schema.Types;
 const Schema = mongoose.Schema;
-const {Item} = require('./item');
-const {City} = require('./city');
-const {Currency} = require('./currency');
+const constants = require('../constants').Models;
 
 let InjectMongoose = (mongooseOther) => { mongoose = mongooseOther };
 
@@ -12,16 +10,19 @@ let InjectMongoose = (mongooseOther) => { mongoose = mongooseOther };
 const CostSchema = new Schema({
         cost: { type : SchemaTypes.Double, 
             required : [ true, 'Cost is required.'] },
-        item: { type : mongoose.Schema.Types.ObjectId, ref: Item.modelName , 
+        item: { type : mongoose.Schema.Types.ObjectId, ref: constants.Item.ItemModelName, 
                 required : [ true, 'Item is required.'] },
-        city: { type: mongoose.Schema.Types.ObjectId, ref: City.modelName, 
+        city: { type: mongoose.Schema.Types.ObjectId, ref: constants.City.CityModelName, 
                      required : [true, 'City is required.'] },
-        currency: { type: mongoose.Schema.Types.ObjectId, ref: Currency.modelName, 
+        currency: { type: mongoose.Schema.Types.ObjectId, ref: constants.Currency.CurrencyModelName, 
                         required : [true, 'Currency is required.'] },
 });
 
 // create model
-let Cost = mongoose.model('Cost', CostSchema);
+let Cost = mongoose.model(constants.Cost.CostModelName, CostSchema);
 
 // export
-module.exports = {Cost, InjectMongoose};
+module.exports = {
+                Cost, 
+                InjectMongoose, 
+                };

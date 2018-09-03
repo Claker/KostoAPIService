@@ -2,7 +2,7 @@ const expect = require('expect');
 const mongoose = require('./mongooseTests');
 
 const countryRepo = require('../repository/country.repo');
-const country = require('../db.models/country');
+const country = require('../db_models/country');
 const Country = country.Country;
 
 describe('Test Country CRUD', () => {

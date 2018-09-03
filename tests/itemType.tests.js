@@ -2,7 +2,7 @@ const expect = require('expect');
 const mongoose = require('./mongooseTests');
 
 const itemTypeRepo = require('../repository/itemType.repo');
-const itemType = require('../db.models/itemType');
+const itemType = require('../db_models/itemType');
 const ItemType = itemType.ItemType;
 
 describe('Test ItemType CRUD', () => {

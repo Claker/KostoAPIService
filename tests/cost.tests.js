@@ -13,15 +13,15 @@ const currencyRepo = require('../repository/currency.repo');
 const currency = require('../db_models/currency');
 const Currency = currency.Currency;
 
-describe('Test City CRUD', () => {
+describe('Test Cost CRUD', () => {
 
-    let idToTest1 = '53cb6b9b4f4ddef1ad47f966';
-    let idToTest2 = '53cb6b9b4f4ddef1ad47f967';
-    let idToTest3 = '53cb6b9b4f4ddef1ad47f968';
-    let idToTest4 = '53cb6b9b4f4ddef1ad47f969';
-    let idToTest5 = '53cb6b9b4f4ddef1ad47f970';
-    let idToTest6 = '53cb6b9b4f4ddef1ad47f971';
-    let idToTest7 = '53cb6b9b4f4ddef1ad47f972';
+    let idToTest1 = '53cb6b9b4f4ddef1ad47f994';
+    let idToTest2 = '53cb6b9b4f4ddef1ad47f995';
+    let idToTest3 = '53cb6b9b4f4ddef1ad47f996';
+    let idToTest4 = '53cb6b9b4f4ddef1ad47f997';
+    let idToTest5 = '53cb6b9b4f4ddef1ad47f998';
+    let idToTest6 = '53cb6b9b4f4ddef1ad47f999';
+    let idToTest7 = '53cb6b9b4f4ddef1ad47f900';
 
     let country1 = new Country({_id:idToTest1, name:'Romania'});
     let country2 = new Country({_id:idToTest2, name:'New Zealand'});

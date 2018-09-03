@@ -1,4 +1,6 @@
-const {Cost} = require('../db.models/cost');
+const {Cost} = require('../db_models/cost');
+const {City} = require('../db_models/city');
+const constants = require('../constants').Models;
 
 // Create
 let insertCost = (cost) => {
@@ -12,6 +14,11 @@ let getFirstCost = (query) => {
 
 let getCosts = (query) => {
     return Cost.find(query);
+};
+
+let getFirstCityWithCosts = (query) => 
+{
+    return City.findOne(query).populate(constants.Cost.CostVirtualsName).exec();
 };
 
 // Update
@@ -35,6 +42,7 @@ let deleteAllCosts = (query) => {
 module.exports = {insertCost, 
                 getFirstCost, 
                 getCosts, 
+                getFirstCityWithCosts,
                 updateFirstCost, 
                 updateAllCosts,
                 deleteAllCosts,

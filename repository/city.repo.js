@@ -1,6 +1,7 @@
-const {City, CityVirtualsName} = require('../db.models/city');
-const {Country} = require('../db.models/country');
-const {Currency} = require('../db.models/currency');
+const {City} = require('../db_models/city');
+const {Country} = require('../db_models/country');
+const {Currency} = require('../db_models/currency');
+const constants = require('../constants').Models;
 
 // Create
 let insertCity = (city) => 
@@ -26,12 +27,12 @@ let getAllCities = () =>
 
 let getCitiesByCountry = (query) => 
 {
-    return Country.findOne(query).populate(CityVirtualsName).exec();
+    return Country.findOne(query).populate(constants.City.CityVirtualsName).exec();
 };
 
 let getCitiesByCurrency = (query) => 
 {
-    return Currency.findOne(query).populate(CityVirtualsName).exec();
+    return Currency.findOne(query).populate(constants.City.CityVirtualsName).exec();
 };
 
 // Update

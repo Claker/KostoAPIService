@@ -1,5 +1,6 @@
-const {Item} = require('../db.models/item');
-const {ItemType} = require('../db.models/itemType');
+const {Item} = require('../db_models/item');
+const {ItemType} = require('../db_models/itemType');
+const constants = require('../constants').Models;
 
 // Create
 let insertItem = (item) => 
@@ -25,7 +26,7 @@ let getAllItems = () =>
 
 let getItemsByItemType = (query) => 
 {
-    return ItemType.findOne(query).populate(Item.modelName.toLowerCase()+'s').exec();
+    return ItemType.findOne(query).populate(constants.Item.ItemVirtualsName).exec();
 };
 
 // Update

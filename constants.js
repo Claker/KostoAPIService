@@ -10,6 +10,16 @@ let KostoLinks = {
     ExpatCityLink : 'https://www.expatistan.com/cost-of-living/',
 };
 
+// for bidirectional dependency because of declaring virtuals
+let Models = {
+    Item : { ItemModelName : 'Item', ItemVirtualsName : 'items' },
+    ItemType : { ItemTypeModelName : 'ItemType' },
+    City : { CityModelName : 'City', CityVirtualsName : 'cities' },
+    Cost : { CostModelName : 'Cost', CostVirtualsName : 'costs' },
+    Country : { CountryModelName : 'Country' },
+    Currency : { CurrencyModelName : 'Currency' }, 
+}
+
 let Expat = 
 {
     FastFood : 'Combo meal in fast food restaurant (Big Mac Meal or similar)',
@@ -25,6 +35,12 @@ let Expat =
     WineRedGoodQuality : '1 bottle of red table wine, good quality',
     CocaCola2L : '2 liters of Coca-Cola',
     BreadSupermarket : 'Bread for 2 people for 1 day',   
+    Housing : 'Housing',
+    ChangeTheCurrency : 'Change the currency:',
+    CostOfLiving : 'Cost of living in',
+    Currency : 'Currency',
+    City : 'City',
+    Country : 'Country',
 }
 
-module.exports = {Expat, KostoRegex, KostoLinks, Port}
+module.exports = {Expat, KostoRegex, KostoLinks, Port, Models}
