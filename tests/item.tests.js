@@ -3,11 +3,9 @@ const mongoose = require('./mongooseTests');
 
 const itemTypeRepo = require('../repository/itemType.repo');
 const itemType = require('../db_models/itemType');
-const ItemType = itemType.ItemType;
 
 const itemRepo = require('../repository/item.repo');
 const item = require('../db_models/item');
-const Item = item.Item;
 
 describe('Test Item CRUD', () => {
 
@@ -17,11 +15,11 @@ describe('Test Item CRUD', () => {
     let idToTest4 = '53cb6b9b4f4ddef1ad47f956';
     let idToTest5 = '53cb6b9b4f4ddef1ad47f957';
 
-    let itemType1 = new ItemType({_id:idToTest1, name:'ItemTypeTest1'});
-    let itemType2 = new ItemType({_id:idToTest2, name:'ItemTypeTest1'});
-    let item1 = new Item({_id:idToTest3, name:'ItemTest1',itemType:idToTest1});
-    let item2 = new Item({_id:idToTest4, name:'ItemTest1',itemType:idToTest1});
-    let item3 = new Item({_id:idToTest5, name:'ItemTest3',itemType:idToTest2});
+    let itemType1 = {_id:idToTest1, name:'ItemTypeTest1'};
+    let itemType2 = {_id:idToTest2, name:'ItemTypeTest1'};
+    let item1 = {_id:idToTest3, name:'ItemTest1',itemType:idToTest1};
+    let item2 = {_id:idToTest4, name:'ItemTest1',itemType:idToTest1};
+    let item3 = {_id:idToTest5, name:'ItemTest3',itemType:idToTest2};
 
     before(()=>
     {

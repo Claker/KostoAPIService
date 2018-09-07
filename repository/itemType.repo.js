@@ -3,7 +3,7 @@ const {ItemType} = require('../db_models/itemType');
 // Create
 let insertItemType = (itemType) => 
 {
-    return itemType.save();
+    return (new ItemType(itemType)).save();
 };
 
 // Read

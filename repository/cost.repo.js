@@ -4,7 +4,7 @@ const constants = require('../constants').Models;
 
 // Create
 let insertCost = (cost) => {
-    return cost.save();
+    return (new Cost(cost)).save();
 };
 
 // Read

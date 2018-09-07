@@ -12,10 +12,10 @@ describe('Test ItemType CRUD', () => {
     let idToTest3 = '53cb6b9b4f4ddef1ad47f951';
     let idToTest4 = '53cb6b9b4f4ddef1ad47f952';
 
-    let itemType1 = new ItemType({_id:idToTest1, name:'ItemTypeTest1'});
-    let itemType2 = new ItemType({_id:idToTest2, name:'ItemTypeTest1'});
-    let itemType3 = new ItemType({_id:idToTest3, name:'ItemTypeTest1'});
-    let itemType4 = new ItemType({_id:idToTest4, name:'ItemTypeTest2'});
+    let itemType1 = {_id:idToTest1, name:'ItemTypeTest1'};
+    let itemType2 = {_id:idToTest2, name:'ItemTypeTest1'};
+    let itemType3 = {_id:idToTest3, name:'ItemTypeTest1'};
+    let itemType4 = {_id:idToTest4, name:'ItemTypeTest2'};
 
     before(()=>
     {

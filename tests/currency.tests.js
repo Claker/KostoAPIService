@@ -3,7 +3,6 @@ const mongoose = require('./mongooseTests');
 
 const currencyRepo = require('../repository/currency.repo');
 const currency = require('../db_models/currency');
-const Currency = currency.Currency;
 
 describe('Test Currency CRUD', () => {
 
@@ -12,10 +11,10 @@ describe('Test Currency CRUD', () => {
     let idToTest3 = '53cb6b9b4f4ddef1ad47f960';
     let idToTest4 = '53cb6b9b4f4ddef1ad47f961';
 
-    let currency1 = new Currency({_id:idToTest1, name:'American Dollar', shortName:'USD', sign:'$'});
-    let currency2 = new Currency({_id:idToTest2, name:'New Zealand Dollar', shortName:'NZD', sign:'NZ$'});
-    let currency3 = new Currency({_id:idToTest3, name:'Euro', shortName:'EUR', sign:'€'});
-    let currency4 = new Currency({_id:idToTest4, name:'Japanese Yen', shortName:'YEN', sign:'¥'});
+    let currency1 = {_id:idToTest1, name:'American Dollar', shortName:'USD', sign:'$'};
+    let currency2 = {_id:idToTest2, name:'New Zealand Dollar', shortName:'NZD', sign:'NZ$'};
+    let currency3 = {_id:idToTest3, name:'Euro', shortName:'EUR', sign:'€'};
+    let currency4 = {_id:idToTest4, name:'Japanese Yen', shortName:'YEN', sign:'¥'};
 
     before(()=>
     {

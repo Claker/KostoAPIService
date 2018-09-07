@@ -6,7 +6,7 @@ const constants = require('../constants').Models;
 // Create
 let insertCity = (city) => 
 {
-    return city.save();
+    return (new City(city)).save();
 };
 
 // Read

@@ -5,7 +5,7 @@ const constants = require('../constants').Models;
 // Create
 let insertItem = (item) => 
 {
-    return item.save();
+    return (new Item(item)).save();
 };
 
 // Read

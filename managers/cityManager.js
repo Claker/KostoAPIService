@@ -7,11 +7,6 @@ const currencyRepo = require('../repository/currency.repo');
 const cityRepo = require('../repository/city.repo');
 const stringSimilarity = require('string-similarity');
 const {Expat} = require('../constants');
-const {Country} = require('../db_models/country');
-const {Currency} = require('../db_models/currency');
-const {Item} = require('../db_models/item');
-const {Cost} = require('../db_models/cost');
-const {City} = require('../db_models/city');
 
 async function FindCityInDB(cityName)
 {
@@ -35,16 +30,16 @@ async function FindCityInDB(cityName)
 
 async function InsertDataFromWeb(data)
 {
-    let savedCountry = await countryRepo.insertCountry(new Country({name:data.country}));
-    let savedCurrency = await currencyRepo.insertCurrency(new Currency({sign:data.currency}));
-    let savedCity = await cityRepo.insertCity(new City({name:data.city,country:savedCountry.id,currency:savedCurrency.id}));
+    let savedCountry = await countryRepo.insertCountry({name:data.country});
+    let savedCurrency = await currencyRepo.insertCurrency({sign:data.currency});
+    let savedCity = await cityRepo.insertCity({name:data.city,country:savedCountry.id,currency:savedCurrency.id});
 
     let items = await itemRepo.getAllItems();
 
-    let cost1 = costRepo.insertCost(new Cost({cost:data.basicLunchMenu,item:items.find(f => f.name === Expat.BasicLunchMenu)._id,
-    city:savedCity._id, currency:savedCurrency._id}));
-    let cost2 = costRepo.insertCost(new Cost({cost:data.fastFood,item:items.find(f=>f.name===Expat.FastFood)._id,
-        city:savedCity._id, currency:savedCurrency._id}));
+    let cost1 = costRepo.insertCost({cost:data.basicLunchMenu,item:items.find(f => f.name === Expat.BasicLunchMenu)._id,
+    city:savedCity._id, currency:savedCurrency._id});
+    let cost2 = costRepo.insertCost({cost:data.fastFood,item:items.find(f=>f.name===Expat.FastFood)._id,
+        city:savedCity._id, currency:savedCurrency._id});
 }
 
 async function searchSimilarCity(cityName)

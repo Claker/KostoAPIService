@@ -3,7 +3,7 @@ const {Country} = require('../db_models/country');
 // Create
 let insertCountry = (country) => 
 {
-    return country.save();
+    return (new Country(country)).save();
 };
 
 // Read

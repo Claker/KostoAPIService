@@ -3,7 +3,7 @@ const {Currency} = require('../db_models/currency');
 // Create
 let insertCurrency = (currency) => 
 {
-    return currency.save();
+    return (new Currency(currency)).save();
 };
 
 // Read

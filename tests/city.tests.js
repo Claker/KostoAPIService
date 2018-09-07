@@ -3,15 +3,12 @@ const mongoose = require('./mongooseTests');
 
 const cityRepo = require('../repository/city.repo');
 const city = require('../db_models/city');
-const City = city.City;
 
 const countryRepo = require('../repository/country.repo');
 const country = require('../db_models/country');
-const Country = country.Country;
 
 const currencyRepo = require('../repository/currency.repo');
 const currency = require('../db_models/currency');
-const Currency = currency.Currency;
 
 describe('Test City CRUD', () => {
 
@@ -23,13 +20,13 @@ describe('Test City CRUD', () => {
     let idToTest6 = '53cb6b9b4f4ddef1ad47f971';
     let idToTest7 = '53cb6b9b4f4ddef1ad47f972';
 
-    let country1 = new Country({_id:idToTest1, name:'Romania'});
-    let country2 = new Country({_id:idToTest2, name:'New Zealand'});
-    let currency1 = new Currency({_id:idToTest3, name:'Romanian RON', shortName:'RON', sign:'RON'});
-    let currency2 = new Currency({_id:idToTest4, name:'New Zealand Dollar', shortName:'NZD', sign:'NZ$'});
-    let city1 = new City({_id:idToTest5, name:'Timisoara', country:idToTest1, currency: idToTest3});
-    let city2 = new City({_id:idToTest6, name:'Deva', country:idToTest1, currency: idToTest3});
-    let city3 = new City({_id:idToTest7, name:'Auckland', country:idToTest2, currency: idToTest4});
+    let country1 = {_id:idToTest1, name:'Romania'};
+    let country2 = {_id:idToTest2, name:'New Zealand'};
+    let currency1 = {_id:idToTest3, name:'Romanian RON', shortName:'RON', sign:'RON'};
+    let currency2 = {_id:idToTest4, name:'New Zealand Dollar', shortName:'NZD', sign:'NZ$'};
+    let city1 = {_id:idToTest5, name:'Timisoara', country:idToTest1, currency: idToTest3};
+    let city2 = {_id:idToTest6, name:'Deva', country:idToTest1, currency: idToTest3};
+    let city3 = {_id:idToTest7, name:'Auckland', country:idToTest2, currency: idToTest4};
 
     before(()=>
     {

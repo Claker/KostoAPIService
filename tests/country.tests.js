@@ -3,7 +3,6 @@ const mongoose = require('./mongooseTests');
 
 const countryRepo = require('../repository/country.repo');
 const country = require('../db_models/country');
-const Country = country.Country;
 
 describe('Test Country CRUD', () => {
 
@@ -12,10 +11,10 @@ describe('Test Country CRUD', () => {
     let idToTest3 = '53cb6b9b4f4ddef1ad47f964';
     let idToTest4 = '53cb6b9b4f4ddef1ad47f965';
 
-    let country1 = new Country({_id:idToTest1, name:'America'});
-    let country2 = new Country({_id:idToTest2, name:'New Zealand'});
-    let country3 = new Country({_id:idToTest3, name:'Romania'});
-    let country4 = new Country({_id:idToTest4, name:'Germany'});
+    let country1 = {_id:idToTest1, name:'America'};
+    let country2 = {_id:idToTest2, name:'New Zealand'};
+    let country3 = {_id:idToTest3, name:'Romania'};
+    let country4 = {_id:idToTest4, name:'Germany'};
 
     before(()=>
     {
