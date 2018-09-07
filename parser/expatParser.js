@@ -52,7 +52,7 @@ let GetParsedPrices = (fullText) =>
     let a13 = a12[1].split(Expat.Housing);
     prices.breadSupermarket = extractPrice(a13[0].trim());
 
-    printPricesToConsole(prices);
+    // printPricesToConsole(prices);
 
     return prices;
 };

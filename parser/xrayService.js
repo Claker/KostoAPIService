@@ -59,21 +59,14 @@ function retryGetNumbeoData(city)
             });
 }
 
-let GetInfoFromWeb = (cityName) =>
+async function GetInfoFromWeb(cityName)
 {
     console.log(`${cityName} - city not found in DB so we get data from websites.`);
-
-    Promise.all(
+    let responses = await Promise.all(
         [getExpatistanData(KostoLinks.ExpatCityLink+cityName)
-        ,getNumbeoData(KostoLinks.NumbeoCityLink+cityName, cityName)])
-    .then(([exData,milkPriceNumbeo]) =>  
-    { 
-        let a = expatParser.GetParsedPrices(exData);
+        ,getNumbeoData(KostoLinks.NumbeoCityLink+cityName, cityName)]);
 
-        // res.send(milkPriceExpatistan);
-
-        // parser.sendPriceResponse(milkPriceExpatistan, milkPriceNumbeo, res);
-    });
+    return expatParser.GetParsedPrices(responses[0]);
 }
 
 module.exports ={

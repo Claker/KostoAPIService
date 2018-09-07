@@ -6,9 +6,9 @@ let InjectMongoose = (mongooseOther) => { mongoose = mongooseOther };
 
 // define schema
 const CurrencySchema = new Schema({
-    name: { type : String, required : [ true, 'Currency Name is required.'] },
-    shortName: { type : String, required : [ true, 'Currency Short Name is required.'] },
-    sign: { type: String },
+    name: { type : String, /*required : [ true, 'Currency Name is required.']*/ },
+    shortName: { type : String, /*required : [ true, 'Currency Short Name is required.']*/ },
+    sign: { type: String, required : [ true, 'Currency Sign is required.'] },
 });
 
 CurrencySchema.virtual(constants.City.CityVirtualsName, {

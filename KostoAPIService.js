@@ -13,12 +13,18 @@ express.get('/getPricesFor/:city',(req,res)=>
 
         if(city)
         {
-            res.send(city);
+            let result = new Object();
+
+            result.city = city;
+            result.costs = city.costs;
+
+            res.send(result);
             return;
         }
         else
         {
-            xray.GetInfoFromWeb(cityName);
+            let x = await xray.GetInfoFromWeb(cityName);
+            cityManager.InsertDataFromWeb(x);
         }
 
     })().then(()=>{},(err)=>{
