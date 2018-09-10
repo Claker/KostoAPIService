@@ -1,6 +1,6 @@
-const {City} = require('../db_models/city');
-const {Country} = require('../db_models/country');
-const {Currency} = require('../db_models/currency');
+const {City} = require('../db/db_models/city');
+const {Country} = require('../db/db_models/country');
+const {Currency} = require('../db/db_models/currency');
 const constants = require('../constants').Models;
 
 // Create

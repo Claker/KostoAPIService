@@ -1,5 +1,5 @@
-const {Item} = require('../db_models/item');
-const {ItemType} = require('../db_models/itemType');
+const {Item} = require('../db/db_models/item');
+const {ItemType} = require('../db/db_models/itemType');
 const constants = require('../constants').Models;
 
 // Create

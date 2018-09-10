@@ -23,8 +23,18 @@ express.get('/getPricesFor/:city',(req,res)=>
         }
         else
         {
-            let x = await xray.GetInfoFromWeb(cityName);
-            cityManager.InsertDataFromWeb(x);
+            let dataFromWeb = await xray.GetInfoFromWeb(cityName);
+
+            if(!dataFromWeb)
+            {
+                console.log('City not found on the internet either.');
+                res.send('City not found :(');
+                return;
+            }
+
+            cityManager.InsertDataFromWebInDB(dataFromWeb);
+            res.send(dataFromWeb);
+            return;
         }
 
     })().then(()=>{},(err)=>{

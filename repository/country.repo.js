@@ -1,4 +1,4 @@
-const {Country} = require('../db_models/country');
+const {Country} = require('../db/db_models/country');
 
 // Create
 let insertCountry = (country) => 

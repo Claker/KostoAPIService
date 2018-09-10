@@ -1,48 +1,24 @@
 const mongoose = require('../repository/mongoose');
 const costRepo = require('../repository/cost.repo');
 const countryRepo = require('../repository/country.repo');
-const itemRepo = require('../repository/item.repo');
-const itemTypeRepo = require('../repository/itemType.repo');
 const currencyRepo = require('../repository/currency.repo');
 const cityRepo = require('../repository/city.repo');
 const stringSimilarity = require('string-similarity');
-const {Expat} = require('../constants');
+const {KostoItemsTemplate} = require('../db/dataTemplate/kostoTemplate');
 
 async function FindCityInDB(cityName)
 {
     let city = await costRepo.getFirstCityWithCosts({name:cityName});
 
     if(!city)
-    {
-        city = await searchSimilarCity(cityName);
-
-        if(city) 
-        {
-            console.log(`City found in DB by similarity : ${city.name} with id ${city._id}`);
-            city = await costRepo.getFirstCityWithCosts({name:city.name});
-        }
-    }
-    // TODO: remove this for final version
-    else{console.log(`City found in DB by name : ${city.name} with id ${city._id}`);}
+        city = await getCityBySimilarity(cityName);
+    else
+        console.log(`City found in DB by name : ${city.name} with id ${city._id}`);
 
     return city;
 } 
 
-async function InsertDataFromWeb(data)
-{
-    let savedCountry = await countryRepo.insertCountry({name:data.country});
-    let savedCurrency = await currencyRepo.insertCurrency({sign:data.currency});
-    let savedCity = await cityRepo.insertCity({name:data.city,country:savedCountry.id,currency:savedCurrency.id});
-
-    let items = await itemRepo.getAllItems();
-
-    let cost1 = costRepo.insertCost({cost:data.basicLunchMenu,item:items.find(f => f.name === Expat.BasicLunchMenu)._id,
-    city:savedCity._id, currency:savedCurrency._id});
-    let cost2 = costRepo.insertCost({cost:data.fastFood,item:items.find(f=>f.name===Expat.FastFood)._id,
-        city:savedCity._id, currency:savedCurrency._id});
-}
-
-async function searchSimilarCity(cityName)
+async function getCityBySimilarity(cityName)
 {
     cities = await cityRepo.getAllCities();
     let city;
@@ -57,9 +33,35 @@ async function searchSimilarCity(cityName)
         }
     });
 
+    if(city) 
+    {
+        console.log(`City found in DB by similarity : ${city.name} with id ${city._id}`);
+        city = await costRepo.getFirstCityWithCosts({name:city.name});
+    }
+
     return city;
 }
 
+async function InsertDataFromWebInDB(data)
+{
+    let country = await countryRepo.getFirstCountry({name:data.country});
+    if(!country)
+        country = await countryRepo.insertCountry({name:data.country});
+    
+    let currency = await currencyRepo.getFirstCurrency({sign:data.currency});
+    if(!currency)
+        currency = await currencyRepo.insertCurrency({sign:data.currency});
+    
+    let city = await cityRepo.insertCity({name:data.city,country:country.id,currency:currency.id});
+
+    costRepo.insertCost({cost:data.lunchMenuInMidRangeRestaurant,item:KostoItemsTemplate.LunchMenuInMidRangeRestaurant._id,
+    city:city._id, currency:currency._id});
+    
+    costRepo.insertCost({cost:data.fastFoodComboMeal,item:KostoItemsTemplate.FastFoodComboMeal._id,
+        city:city._id, currency:currency._id});
+}
+
 module.exports = {
-    FindCityInDB, InsertDataFromWeb
+    FindCityInDB, 
+    InsertDataFromWebInDB,
 }

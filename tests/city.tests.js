@@ -1,14 +1,8 @@
 const expect = require('expect');
 const mongoose = require('./mongooseTests');
-
 const cityRepo = require('../repository/city.repo');
-const city = require('../db_models/city');
-
 const countryRepo = require('../repository/country.repo');
-const country = require('../db_models/country');
-
 const currencyRepo = require('../repository/currency.repo');
-const currency = require('../db_models/currency');
 
 describe('Test City CRUD', () => {
 
@@ -28,16 +22,11 @@ describe('Test City CRUD', () => {
     let city2 = {_id:idToTest6, name:'Deva', country:idToTest1, currency: idToTest3};
     let city3 = {_id:idToTest7, name:'Auckland', country:idToTest2, currency: idToTest4};
 
-    before(()=>
-    {
-        city.InjectMongoose(mongoose);
-        country.InjectMongoose(mongoose);
-        currency.InjectMongoose(mongoose);
-    });
-
-    // after(()=>{
-    //     mongoose.connection.close();
-    //     mongoose.connection.db.dropDatabase(()=>{console.log('asdasda')});
+    // before(()=>
+    // {
+        // city.InjectMongoose(mongoose);
+        // country.InjectMongoose(mongoose);
+        // currency.InjectMongoose(mongoose);
     // });
 
     it('should insert cities', (done)=>{

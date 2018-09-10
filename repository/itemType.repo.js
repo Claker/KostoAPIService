@@ -1,4 +1,4 @@
-const {ItemType} = require('../db_models/itemType');
+const {ItemType} = require('../db/db_models/itemType');
 
 // Create
 let insertItemType = (itemType) => 

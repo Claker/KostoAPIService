@@ -1,4 +1,4 @@
-const {Currency} = require('../db_models/currency');
+const {Currency} = require('../db/db_models/currency');
 
 // Create
 let insertCurrency = (currency) => 

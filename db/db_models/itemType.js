@@ -1,8 +1,8 @@
 let mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const constants = require('../constants').Models;
+const constants = require('../../constants').Models;
 
-let InjectMongoose = (mongooseOther) => { mongoose = mongooseOther };
+let InjectMongoose = (mongooseOther) => mongoose = mongooseOther;
 
 // define schema
 const ItemTypeSchema = new Schema({
@@ -19,4 +19,6 @@ ItemTypeSchema.virtual(constants.Item.ItemVirtualsName , {
 let ItemType = mongoose.model(constants.ItemType.ItemTypeModelName, ItemTypeSchema);
 
 // export
-module.exports = {ItemType, InjectMongoose};
+module.exports = {
+    ItemType,
+};

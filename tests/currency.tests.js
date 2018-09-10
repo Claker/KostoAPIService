@@ -1,8 +1,6 @@
 const expect = require('expect');
 const mongoose = require('./mongooseTests');
-
 const currencyRepo = require('../repository/currency.repo');
-const currency = require('../db_models/currency');
 
 describe('Test Currency CRUD', () => {
 
@@ -16,10 +14,10 @@ describe('Test Currency CRUD', () => {
     let currency3 = {_id:idToTest3, name:'Euro', shortName:'EUR', sign:'€'};
     let currency4 = {_id:idToTest4, name:'Japanese Yen', shortName:'YEN', sign:'¥'};
 
-    before(()=>
-    {
-        currency.InjectMongoose(mongoose);
-    });
+    // before(()=>
+    // {
+    //     currencyRepo.InjectMongoose(mongoose);
+    // });
 
     it('should insert currencies',(done)=>{
         (async ()=>{

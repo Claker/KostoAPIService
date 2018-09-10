@@ -2,9 +2,7 @@ let mongoose = require('mongoose');
 require('mongoose-double')(mongoose);
 const SchemaTypes = mongoose.Schema.Types;
 const Schema = mongoose.Schema;
-const constants = require('../constants').Models;
-
-let InjectMongoose = (mongooseOther) => { mongoose = mongooseOther };
+const constants = require('../../constants').Models;
 
 // define schema
 const CostSchema = new Schema({
@@ -23,6 +21,5 @@ let Cost = mongoose.model(constants.Cost.CostModelName, CostSchema);
 
 // export
 module.exports = {
-                Cost, 
-                InjectMongoose, 
-                };
+        Cost, 
+};

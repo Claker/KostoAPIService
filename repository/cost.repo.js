@@ -1,5 +1,5 @@
-const {Cost} = require('../db_models/cost');
-const {City} = require('../db_models/city');
+const {Cost} = require('../db/db_models/cost');
+const {City} = require('../db/db_models/city');
 const constants = require('../constants').Models;
 
 // Create
@@ -46,4 +46,5 @@ module.exports = {insertCost,
                 updateFirstCost, 
                 updateAllCosts,
                 deleteAllCosts,
-                deleteFirstCost};
+                deleteFirstCost,
+            };
