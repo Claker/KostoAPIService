@@ -18,7 +18,11 @@ let getCosts = (query) => {
 
 let getFirstCityWithCosts = (query) => 
 {
-    return City.findOne(query).populate(constants.Cost.CostVirtualsName).exec();
+    return City.findOne(query)
+        .populate(constants.Cost.CostVirtualsName)
+        .populate(constants.Country.CountryModelName.toLowerCase())
+        .populate(constants.Currency.CurrencyModelName.toLowerCase())
+        .exec();
 };
 
 // Update

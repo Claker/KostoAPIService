@@ -2,6 +2,7 @@ const express = require('express')();
 const xray = require('./parser/xrayService');
 const {Port} = require('./constants');
 const cityManager = require('./managers/cityManager');
+const cityViewModel = require('./viewModels/cityViewModel');
 
 express.get('/getPricesFor/:city',(req,res)=>
 {
@@ -13,10 +14,7 @@ express.get('/getPricesFor/:city',(req,res)=>
 
         if(city)
         {
-            let result = new Object();
-
-            result.city = city;
-            result.costs = city.costs;
+            let result = await cityViewModel.TransformDbDataToView(city);
 
             res.send(result);
             return;

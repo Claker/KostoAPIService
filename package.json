@@ -11,6 +11,7 @@
   "dependencies": {
     "express": "^4.16.3",
     "growl": "^1.10.0",
+    "lodash": "^4.17.10",
     "mongodb": "^3.1.1",
     "mongoose": "^5.2.6",
     "mongoose-double": "0.0.1",
