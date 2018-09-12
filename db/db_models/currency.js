@@ -1,8 +1,6 @@
 let mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const constants = require('../../constants').Models;
-
-let InjectMongoose = (mongooseOther) => mongoose = mongooseOther;
+const {Models} = require('../../constants');
 
 // define schema
 const CurrencySchema = new Schema({
@@ -11,20 +9,20 @@ const CurrencySchema = new Schema({
     sign: { type: String, required : [ true, 'Currency Sign is required.'] },
 });
 
-CurrencySchema.virtual(constants.City.CityVirtualsName, {
-    ref: constants.City.CityModelName,
+CurrencySchema.virtual(Models.City.CityVirtualsName, {
+    ref: Models.City.CityModelName,
     localField: '_id', // Find cities where `localField`
     foreignField: 'currency', // is equal to `foreignField`
 });
 
-CurrencySchema.virtual(constants.Cost.CostVirtualsName, {
-    ref: constants.Cost.CostModelName,
+CurrencySchema.virtual(Models.Cost.CostVirtualsName, {
+    ref: Models.Cost.CostModelName,
     localField: '_id', // Find items where `localField`
     foreignField: 'currency', // is equal to `foreignField`
 });
 
 // create model
-let Currency = mongoose.model(constants.Currency.CurrencyModelName, CurrencySchema);
+let Currency = mongoose.model(Models.Currency.CurrencyModelName, CurrencySchema);
 
 // export
 module.exports = {

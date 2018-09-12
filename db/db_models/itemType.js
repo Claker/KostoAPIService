@@ -1,22 +1,20 @@
 let mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const constants = require('../../constants').Models;
-
-let InjectMongoose = (mongooseOther) => mongoose = mongooseOther;
+const {Models} = require('../../constants');
 
 // define schema
 const ItemTypeSchema = new Schema({
     name : { type : String, required : [ true, 'Item Type name is required.' ] }
 });
 
-ItemTypeSchema.virtual(constants.Item.ItemVirtualsName , {
-    ref: constants.Item.ItemModelName,
+ItemTypeSchema.virtual(Models.Item.ItemVirtualsName , {
+    ref: Models.Item.ItemModelName,
     localField: '_id', // Find items where `localField`
     foreignField: 'itemType', // is equal to `foreignField`
 });
 
 // create model
-let ItemType = mongoose.model(constants.ItemType.ItemTypeModelName, ItemTypeSchema);
+let ItemType = mongoose.model(Models.ItemType.ItemTypeModelName, ItemTypeSchema);
 
 // export
 module.exports = {
