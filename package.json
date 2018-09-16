@@ -4,7 +4,11 @@
   "description": "KostoAPIService",
   "main": "KostoAPIService.js",
   "scripts": {
+    "start" : "node KostoAPIService.js",
     "test": "mocha tests/**/*.tests.js"
+  },
+  "engines": {
+    "node" : "8.11.3"
   },
   "author": "ClaudiuSocaci",
   "license": "ISC",

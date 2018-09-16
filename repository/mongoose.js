@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
-
-const mongodbURL = 'mongodb://localhost:27017/Kosto';
+const {MongoDB_URL} = require('../constants')
 
 mongoose.Promise = global.Promise;
-mongoose.connect(mongodbURL, { useNewUrlParser: true });
+mongoose.connect(MongoDB_URL, { useNewUrlParser: true });
 
 module.exports = {mongoose};

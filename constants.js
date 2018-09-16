@@ -1,9 +1,12 @@
 let Port = process.env.PORT || 3000;
 
+//mongodb://heroku_3zndz79h:rslgth8mkfr5s1a3ku30oo1m15@ds119702.mlab.com:19702/heroku_3zndz79h
+let MongoDB_URL = process.env.MONGODB_URI || 'mongodb://localhost:27017/Kosto';
+
 let KostoRegex = {
     IntAndFloatsRegex : /[+-]?\d+(\.\d+)?/g,
     CurrencyRegex : /[^\d]+[^\.\d+]?/g,
-}
+};
 
 let KostoLinks = {
     NumbeoCityLink : 'https://www.numbeo.com/cost-of-living/in/',
@@ -18,7 +21,7 @@ let Models = {
     Cost : { CostModelName : 'Cost', CostVirtualsName : 'costs' },
     Country : { CountryModelName : 'Country' },
     Currency : { CurrencyModelName : 'Currency' }, 
-}
+};
 
 let Items = {
     Expat :
@@ -110,5 +113,12 @@ let Items = {
         City : 'City',
         Country : 'Country',
     },
-}
-module.exports = {Items, KostoRegex, KostoLinks, Port, Models}
+};
+module.exports = {
+    Items, 
+    KostoRegex, 
+    KostoLinks, 
+    Port, 
+    Models,
+    MongoDB_URL,
+};

@@ -10,19 +10,18 @@ async function TransformDbDataToView(city)
     result.city = city.name;
     result.country = city.country.name;
     result.currency = city.currency.sign;
-    result.costs = [];
 
-    let propsArray = Object.values(KostoItemsTemplate);
+    let items = Object.values(KostoItemsTemplate);
 
-    city.costs.forEach(e=>{
-        for (let item of propsArray)
+    // peformance looks to be O(n^2) but it actually is O(n)
+    result.costs = city.costs.map(e=>{
+
+        let item = items.find((i) => i._id.toString() === e.item.toString());
+
+        if(item)
         {
-            if(item._id === e.item.toString())
-            {
-                result.costs.push({itemName:item.name,cost:e.cost+result.currency});
-                _.remove(propsArray,(e) => e === item);
-                break;
-            }
+            _.remove(items,(e) => e === item); // performance-wise, delete the found item
+            return { itemName:item.name, cost:e.cost+result.currency };
         }
     });
 
@@ -30,5 +29,5 @@ async function TransformDbDataToView(city)
 }
 
 module.exports={
-    TransformDbDataToView
-}
+    TransformDbDataToView,
+};

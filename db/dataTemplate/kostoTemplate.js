@@ -22,7 +22,7 @@ let KostoItemTypesTemplate =
     Travel : { name : 'Travel', _id : id1 },
     Food : { name : 'Food', _id : id2 },
     Entertainment : { name : 'Entertainment', _id : id3 }, 
-}
+};
 
 let KostoItemsTemplate =
 {
@@ -78,7 +78,7 @@ let KostoItemsTemplate =
     Taxi1Km : { name : 'Taxi 1km (Normal Tariff)', _id : id47, itemType : KostoItemTypesTemplate.Travel._id },
     Taxi1HourWaiting : { name : 'Taxi 1hour Waiting (Normal Tariff)', _id : id48, itemType : KostoItemTypesTemplate.Travel._id },
     Cinema1TicketAtMovieRelease : { name : 'Cinema, International Release, 1 Seat', _id : id49, itemType : KostoItemTypesTemplate.Entertainment._id },
-}
+};
 
 module.exports = {
     KostoItemsTemplate, 

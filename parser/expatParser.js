@@ -63,21 +63,21 @@ let GetParsedPrices = (fullText) =>
     return prices;
 };
 
-function extractPrice(priceString)
+let extractPrice = (priceString) =>
 {
     // in case the number has the format like 12,132.12 remove commas
     priceString = priceString.replace(',','');
     return parseFloat(priceString.match(KostoRegex.IntAndFloatsRegex));
-}
+};
 
-function extractCurrency(currencyString)
+let extractCurrency = (currencyString) =>
 {
     // in case the number has the format like 12,132.12 or 12,321 remove commas
     currencyString = currencyString.replace(',','');
     return currencyString.match(KostoRegex.CurrencyRegex)[0];
-}
+};
 
-function printPricesToConsole(prices)
+let printPricesToConsole = (prices) =>
 {
     console.log(Expat.LunchMenuInMidRangeRestaurant, ':'+prices.lunchMenuInMidRangeRestaurant);
     console.log(Expat.FastFoodComboMeal,':'+prices.fastFoodComboMeal);
@@ -95,7 +95,7 @@ function printPricesToConsole(prices)
     console.log(Expat.Currency, prices.currency);
     console.log(Expat.City, prices.city);
     console.log(Expat.Country, prices.country);
-}
+};
 
 module.exports={
     GetParsedPrices,

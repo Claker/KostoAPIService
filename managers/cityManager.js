@@ -6,7 +6,7 @@ const cityRepo = require('../repository/city.repo');
 const stringSimilarity = require('string-similarity');
 const {KostoItemsTemplate} = require('../db/dataTemplate/kostoTemplate');
 
-async function FindCityInDB(cityName)
+let FindCityInDB = async (cityName) =>
 {
     let city = await costRepo.getFirstCityWithCosts({name:cityName});
 
@@ -16,9 +16,9 @@ async function FindCityInDB(cityName)
         console.log(`City found in DB by name : ${city.name} with id ${city._id}`);
 
     return city;
-} 
+};
 
-async function InsertDataFromWebInDB(data)
+let InsertDataFromWebInDB = async (data) =>
 {
     let country = await countryRepo.getFirstCountry({name:data.country});
     if(!country)
@@ -33,9 +33,9 @@ async function InsertDataFromWebInDB(data)
         city = await cityRepo.insertCity({name:data.city,country:country.id,currency:currency.id});
 
     insertCosts(data, currency, city);
-}
+};
 
-async function getCityBySimilarity(cityName)
+let getCityBySimilarity = async (cityName) =>
 {
     cities = await cityRepo.getAllCities();
     let city;
@@ -57,9 +57,9 @@ async function getCityBySimilarity(cityName)
     }
 
     return city;
-}
+};
 
-function insertCosts(data, currency, city)
+let insertCosts = (data, currency, city) =>
 {
     costRepo.insertCost({cost:data.lunchMenuInMidRangeRestaurant,item:KostoItemsTemplate.LunchMenuInMidRangeRestaurant._id,
         city:city._id, currency:currency._id});
@@ -134,9 +134,9 @@ function insertCosts(data, currency, city)
 
     // costRepo.insertCost({cost:data.cocktailInPub,item:KostoItemsTemplate.CocktailInPub._id,
     //     city:city._id, currency:currency._id});
-}
+};
 
 module.exports = {
     FindCityInDB, 
     InsertDataFromWebInDB,
-}
+};

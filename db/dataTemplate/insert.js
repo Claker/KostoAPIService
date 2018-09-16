@@ -3,54 +3,19 @@ const {KostoItemsTemplate,KostoItemTypesTemplate} = require('./kostoTemplate');
 const itemTypeRepo = require('../../repository/itemType.repo');
 const itemRepo = require('../../repository/item.repo');
 
-Promise.all([
-    itemTypeRepo.insertItemType(KostoItemTypesTemplate.Travel),
-    itemTypeRepo.insertItemType(KostoItemTypesTemplate.Food),
-    itemTypeRepo.insertItemType(KostoItemTypesTemplate.Entertainment),
+(async () =>
+{
+    let itemTypes = Object.values(KostoItemTypesTemplate);
+    for (let itemType of itemTypes)
+    {
+        itemTypeRepo.insertItemType(itemType);
+    }
 
-    itemRepo.insertItem(KostoItemsTemplate.LunchMenuInMidRangeRestaurant),
-    itemRepo.insertItem(KostoItemsTemplate.FastFoodComboMeal),
-    itemRepo.insertItem(KostoItemsTemplate.Beer500mlRestaurant),
-    itemRepo.insertItem(KostoItemsTemplate.Beer500mlSupermarket),
-    itemRepo.insertItem(KostoItemsTemplate.CappuccinoInRestaurant),
-    itemRepo.insertItem(KostoItemsTemplate.Milk1LInSupermarket),
-    itemRepo.insertItem(KostoItemsTemplate.Bread500mgInSupermarket),
-    itemRepo.insertItem(KostoItemsTemplate.Eggs12InSupermarket),
-    itemRepo.insertItem(KostoItemsTemplate.Apples1kgInSupermarket),
-    itemRepo.insertItem(KostoItemsTemplate.Tomato1kg),
-    itemRepo.insertItem(KostoItemsTemplate.Potatos1kg),
-    itemRepo.insertItem(KostoItemsTemplate.WineRedMidRangeQuality),
-    itemRepo.insertItem(KostoItemsTemplate.LocalCheese500gInSupermarket),
-    itemRepo.insertItem(KostoItemsTemplate.Chicken500gInSupermarket),
-    itemRepo.insertItem(KostoItemsTemplate.Cigarettes20Marlboro),
-    itemRepo.insertItem(KostoItemsTemplate.MonthlyLocalTransport),
-    itemRepo.insertItem(KostoItemsTemplate.Gasoline1L),
-    itemRepo.insertItem(KostoItemsTemplate.Taxi8Km),
-    itemRepo.insertItem(KostoItemsTemplate.DinnerAtPubFor2),
-    itemRepo.insertItem(KostoItemsTemplate.CocaCola2L),
-    itemRepo.insertItem(KostoItemsTemplate.Cinema2Tickets),
-    itemRepo.insertItem(KostoItemsTemplate.Theater2TicketsBestSeats),
-    itemRepo.insertItem(KostoItemsTemplate.DinnerFor2AtExpensiveRestaurant3CoursesAndDrink),
-    itemRepo.insertItem(KostoItemsTemplate.CocktailInPub),
-    itemRepo.insertItem(KostoItemsTemplate.ImportedBeer330mlInRestaurant),
-    itemRepo.insertItem(KostoItemsTemplate.ImportedBeer330mlInSupermarket),
-    itemRepo.insertItem(KostoItemsTemplate.CokeInRestaurant),
-    itemRepo.insertItem(KostoItemsTemplate.MealFor2MidRangeRestaurant3Courses),
-    itemRepo.insertItem(KostoItemsTemplate.WaterInRestaurant),
-    itemRepo.insertItem(KostoItemsTemplate.Rice1Kg),
-    itemRepo.insertItem(KostoItemsTemplate.LocalCheese1Kg),
-    itemRepo.insertItem(KostoItemsTemplate.Chicken1KgInSupermarket),
-    itemRepo.insertItem(KostoItemsTemplate.BeefOrRedMeat1kgInSupermarket),
-    itemRepo.insertItem(KostoItemsTemplate.Banana1KgInSupermarket),
-    itemRepo.insertItem(KostoItemsTemplate.Oranges1KgInSupermarket),
-    itemRepo.insertItem(KostoItemsTemplate.Onion1KgInSupermarket),
-    itemRepo.insertItem(KostoItemsTemplate.LetuceInSupermarket),
-    itemRepo.insertItem(KostoItemsTemplate.Water1500mlInSupermarket),
-    itemRepo.insertItem(KostoItemsTemplate.LocalTransport),
-    itemRepo.insertItem(KostoItemsTemplate.TaxiStartTariff),
-    itemRepo.insertItem(KostoItemsTemplate.Taxi1Km),
-    itemRepo.insertItem(KostoItemsTemplate.Taxi1HourWaiting),
-    itemRepo.insertItem(KostoItemsTemplate.Cinema1TicketAtMovieRelease),
+    let items = Object.values(KostoItemsTemplate);
+    for (let item of items)
+    {
+        itemRepo.insertItem(item);
+    }
 
-]).then((res)=> { console.log('Finished inserting template data'); } ,
+})().then((res)=> { console.log('Finished inserting template data'); } ,
         (err)=> console.log(`Error encountered: ${err}`));
