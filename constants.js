@@ -1,6 +1,5 @@
 let Port = process.env.PORT || 3000;
 
-//mongodb://heroku_3zndz79h:rslgth8mkfr5s1a3ku30oo1m15@ds119702.mlab.com:19702/heroku_3zndz79h
 let MongoDB_URL = process.env.MONGODB_URI || 'mongodb://localhost:27017/Kosto';
 
 let KostoRegex = {

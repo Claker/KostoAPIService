@@ -1,8 +1,6 @@
 const express = require('express')();
-const xray = require('./parser/xrayService');
 const {Port} = require('./constants');
-const cityManager = require('./managers/cityManager');
-const cityViewModel = require('./viewModels/cityViewModel');
+const cityController = require('./controllers/cityController');
 
 express.get('/getPricesFor/:city',(req,res)=>
 {
@@ -10,28 +8,23 @@ express.get('/getPricesFor/:city',(req,res)=>
 
     (async () => {
 
-        let city = await cityManager.FindCityInDB(cityName);
+        let city = await cityController.FindCityInDB(cityName);
 
-        if(city)
-        {
-            let result = await cityViewModel.TransformDbDataToView(city);
-
-            res.send(result);
+        if(city){
+            res.send(await cityController.TransformDbDataToView(city, true));
             return;
         }
-        else
-        {
-            let dataFromWeb = await xray.GetInfoFromWeb(cityName);
-
-            if(!dataFromWeb)
-            {
+        else{
+            let found = await cityController.FindCityOnWebAndInsertInDB(cityName);
+            
+            if(!found){
                 console.log('City not found on the internet either.');
                 res.send('City not found :(');
                 return;
             }
 
-            cityManager.InsertDataFromWebInDB(dataFromWeb);
-            res.send(dataFromWeb);
+            let city = await cityController.FindCityInDB(cityName);
+            res.send(await cityController.TransformDbDataToView(city, false));
             return;
         }
 
