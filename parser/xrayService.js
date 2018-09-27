@@ -9,7 +9,7 @@ let GetInfoFromWeb = async (cityName) =>
         [getExpatistanData(KostoLinks.ExpatCityLink+cityName)
         ,getNumbeoData(KostoLinks.NumbeoCityLink+cityName, cityName)]);
 
-    if(!responses[0])
+    if(!responses || responses[0])
         return undefined;
 
     return expatParser.GetParsedPrices(responses[0]);

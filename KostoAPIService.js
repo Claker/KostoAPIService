@@ -29,7 +29,9 @@ express.get('/getPricesFor/:city',(req,res)=>
         }
 
     })().then(()=>{},(err)=>{
-        console.log(`Error encoutered : ${err}`)
+        console.log(`Error encoutered : ${err}`);
+        res.send('City not found :(');
+        return;
     });
 });
 
